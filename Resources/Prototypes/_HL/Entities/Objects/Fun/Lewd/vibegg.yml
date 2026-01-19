@@ -1,0 +1,52 @@
+- type: entity
+  parent: BaseItem
+  id: BaseVibeEgg
+  abstract: true
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 75
+      Steel: 25
+  - type: StaticPrice
+    price: 100
+  - type: TriggerOnSignal
+  - type: EmitSoundOnTrigger
+    path: /Audio/Floof/Lewd/vibrate.ogg
+  - type: ItemToggle
+    predictable: false
+  - type: ItemToggleActiveSound
+    activeSound:
+      path: /Audio/Floof/Lewd/vibrate.ogg
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+    - Trigger
+    - Toggle
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        on:
+          True: { visible: true }
+          False: { visible: false }
+        base:
+          True: { visible: false }
+          False: { visible: true }
+          
+- type: entity
+  parent: BaseVibeEgg
+  id: VibeEggPink
+  name: pink vibrator egg
+  description: A vibrator egg! Connect it to other devices!
+  components:
+  - type: Sprite
+    sprite: _HL/Objects/Fun/Lewd/vibegg.rsi
+    layers:
+      - state: vibegg
+        map: ["base"]
+      - state: vibegg_on
+        map: ["on"]
+        visible: false
