@@ -1,0 +1,99 @@
+- type: entity
+  id: PillowLongWhite
+  parent: BasePlushie
+  name: long white pillow
+  description: used for long snoozes
+  components:
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows.rsi
+    state: pillow_long_white
+
+- type: entity
+  id: PillowLumpBlue
+  parent: BasePlushie
+  name: lumpy blue pillow
+  description: comfy
+  components:
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows.rsi
+    state: pillow_lump_blue
+
+- type: entity
+  id: PillowLumpRed
+  parent: BasePlushie
+  name: lumpy red pillow
+  description: comfy
+  components:
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows.rsi
+    state: pillow_lump_red
+
+- type: entity
+  id: PillowLumpWhite
+  parent: BasePlushie
+  name: lumpy white pillow
+  description: comfy
+  components:
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows.rsi
+    state: pillow_lump_white
+
+- type: entity
+  id: PillowSmallBlue
+  parent: BasePlushie
+  name: small blue pillow
+  description: comfy but small
+  components:
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows.rsi
+    state: pillow_small_blue
+
+- type: entity
+  id: PillowLumpRed
+  parent: BasePlushie
+  name: lumpy red pillow
+  description: comfy but small
+  components:
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows.rsi
+    state: pillow_small_red
+
+- type: entity
+  id: PillowLumpWhite
+  parent: BasePlushie
+  name: lumpy white pillow
+  description: comfy but small
+  components:
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows.rsi
+    state: pillow_small_white
+
+- type: entity
+  id: PillowSquareBlue
+  parent: BasePlushie
+  name: small blue pillow
+  description: comfy but square
+  components:
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows.rsi
+    state: pillow_square_blue
+
+- type: entity
+  id: PillowSquareRed
+  parent: BasePlushie
+  name: lumpy red pillow
+  description: comfy but square
+  components:
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows.rsi
+    state: pillow_square_red
+
+- type: entity
+  id: PillowSquareWhite
+  parent: BasePlushie
+  name: lumpy white pillow
+  description: comfy but square
+  components:
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows.rsi
+    state: pillow_square_white
