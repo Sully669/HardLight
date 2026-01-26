@@ -4,6 +4,8 @@
   name: long white pillow
   description: used for long snoozes
   components:
+  - type: Item
+    heldPrefix: Whitepillow
   - type: Sprite
     sprite: _HL/Objects/Fun/pillows.rsi
     state: pillow_long_white
@@ -14,6 +16,8 @@
   name: lumpy blue pillow
   description: comfy
   components:
+  - type: Item
+    heldPrefix: Bluepillow
   - type: Sprite
     sprite: _HL/Objects/Fun/pillows.rsi
     state: pillow_lump_blue
@@ -24,6 +28,8 @@
   name: lumpy red pillow
   description: comfy
   components:
+  - type: Item
+    heldPrefix: Redpillow
   - type: Sprite
     sprite: _HL/Objects/Fun/pillows.rsi
     state: pillow_lump_red
@@ -34,6 +40,8 @@
   name: lumpy white pillow
   description: comfy
   components:
+  - type: Item
+    heldPrefix: Whitepillow
   - type: Sprite
     sprite: _HL/Objects/Fun/pillows.rsi
     state: pillow_lump_white
@@ -44,26 +52,32 @@
   name: small blue pillow
   description: comfy but small
   components:
+  - type: Item
+    heldPrefix: Bluepillow
   - type: Sprite
     sprite: _HL/Objects/Fun/pillows.rsi
     state: pillow_small_blue
 
 - type: entity
-  id: PillowLumpRed
+  id: PillowSmallRed
   parent: BasePlushie
-  name: lumpy red pillow
+  name: small red pillow
   description: comfy but small
   components:
+  - type: Item
+    heldPrefix: Redpillow
   - type: Sprite
     sprite: _HL/Objects/Fun/pillows.rsi
     state: pillow_small_red
 
 - type: entity
-  id: PillowLumpWhite
+  id: PillowSmallWhite
   parent: BasePlushie
-  name: lumpy white pillow
+  name: small white pillow
   description: comfy but small
   components:
+  - type: Item
+    heldPrefix: Whitepillow
   - type: Sprite
     sprite: _HL/Objects/Fun/pillows.rsi
     state: pillow_small_white
@@ -71,9 +85,11 @@
 - type: entity
   id: PillowSquareBlue
   parent: BasePlushie
-  name: small blue pillow
+  name: square blue pillow
   description: comfy but square
   components:
+  - type: Item
+    heldPrefix: Bluepillow
   - type: Sprite
     sprite: _HL/Objects/Fun/pillows.rsi
     state: pillow_square_blue
@@ -81,9 +97,11 @@
 - type: entity
   id: PillowSquareRed
   parent: BasePlushie
-  name: lumpy red pillow
+  name: square red pillow
   description: comfy but square
   components:
+  - type: Item
+    heldPrefix: Redpillow
   - type: Sprite
     sprite: _HL/Objects/Fun/pillows.rsi
     state: pillow_square_red
@@ -91,9 +109,159 @@
 - type: entity
   id: PillowSquareWhite
   parent: BasePlushie
-  name: lumpy white pillow
+  name: square white pillow
   description: comfy but square
   components:
+  - type: Item
+    heldPrefix: Whitepillow
   - type: Sprite
     sprite: _HL/Objects/Fun/pillows.rsi
     state: pillow_square_white
+
+# special pillows
+
+- type: entity
+  id: PillowLove
+  parent: BasePlushie
+  name: love pillow
+  description: lovely dreams
+  components:
+  - type: Item
+    heldPrefix: Redpillow
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows_special.rsi
+    state: pillow_love
+
+- type: entity
+  id: PillowPawPrint
+  parent: BasePlushie
+  name: paw print pillow
+  description: Imagine if this paw stepped on you, instead of the pillow.
+  components:
+  - type: Item
+    heldPrefix: Bluepillow
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows_special.rsi
+    state: pillow_paw_print
+
+- type: entity
+  id: PillowReigalRed
+  parent: BasePlushie
+  name: reigal red pillow
+  description: snooze like royalty
+  components:
+  - type: Item
+    heldPrefix: Redpillow
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows_special.rsi
+    state: pillow_reigal_red
+
+- type: entity
+  id: PillowStarbirst
+  parent: BasePlushie
+  name: starbirst pillow
+  description: smells like blue raspberry candy
+  components:
+  - type: Item
+    heldPrefix: Bluepillow
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows_special.rsi
+    state: pillow_starbirst
+
+- type: entity
+  id: PillowStiff
+  parent: BasePlushie
+  name: stiff pillow
+  description: is this filled with rocks..?
+  components:
+  - type: Item
+    heldPrefix: Whitepillow
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows_special.rsi
+    state: pillow_stiff
+
+- type: entity
+  id: PillowStiffLong
+  parent: BasePlushie
+  name: stiff long pillow
+  description: is this filled with rocks..?
+  components:
+  - type: Item
+    heldPrefix: Whitepillow
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows_special.rsi
+    state: pillow_stiff_long
+
+- type: entity
+  id: PillowStiffGreen
+  parent: BasePlushie
+  name: stiff green pillow
+  description: is this filled with rocks..?
+  components:
+  - type: Item
+    heldPrefix: Greenpillow
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows_special.rsi
+    state: pillow_stiff_green
+
+- type: entity
+  id: PillowStiffLongGreen
+  parent: BasePlushie
+  name: stiff long green pillow
+  description: is this filled with rocks..?
+  components:
+  - type: Item
+    heldPrefix: Greenpillow
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows_special.rsi
+    state: pillow_stiff_long_green
+
+- type: entity
+  id: PillowWeh
+  parent: BasePlushie
+  name: weh pillow
+  description: weh
+  components:
+  - type: Item
+    heldPrefix: Greenpillow
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows_special.rsi
+    state: pillow_weh
+
+# body pillows
+
+- type: entity
+  id: PillowBodyWeh
+  parent: BasePlushie
+  name: weh body pillow
+  description: weh
+  components:
+  - type: Item
+    heldPrefix: Greenpillow
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows_body.rsi
+    state: pillow_body_weh_front
+
+- type: entity
+  id: PillowBodyUrist
+  parent: BasePlushie
+  name: urist body pillow
+  description: looks average in every kind of way
+  components:
+  - type: Item
+    heldPrefix: Whitepillow
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows_body.rsi
+    state: pillow_body_urist_front
+
+- type: entity
+  id: PillowBodyMiku
+  parent: BasePlushie
+  name: performer body pillow
+  description: smells like leek
+  components:
+  - type: Item
+    heldPrefix: Whitepillow
+  - type: Sprite
+    sprite: _HL/Objects/Fun/pillows_body.rsi
+    state: pillow_body_miku_front

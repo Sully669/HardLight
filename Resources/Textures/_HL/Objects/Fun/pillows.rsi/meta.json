@@ -16,6 +16,14 @@
     { "name": "pillow_small_white" },
     { "name": "pillow_square_blue" },
     { "name": "pillow_square_red" },
-    { "name": "pillow_square_white" }
+    { "name": "pillow_square_white" },
+    { "name": "Bluepillow_inhand-left", "directions": 4 },
+    { "name": "Bluepillow_inhand-right", "directions": 4 },
+    { "name": "Greenpillow_inhand-left", "directions": 4 },
+    { "name": "Greenpillow_inhand-right", "directions": 4 },
+    { "name": "Redpillow_inhand-left", "directions": 4 },
+    { "name": "Redpillow_inhand-right", "directions": 4 },
+    { "name": "Whitepillow_inhand-left", "directions": 4 },
+    { "name": "Whitepillow_inhand-right", "directions": 4 }
   ]
 }
