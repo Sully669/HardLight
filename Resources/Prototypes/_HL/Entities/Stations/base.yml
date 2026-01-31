@@ -228,7 +228,6 @@
       - CrystalBlue
       - CrystalCyan
       components:
-      - Gun
       - Ammo
       - Food
       - Drink
@@ -247,6 +246,7 @@
       - Mail
       - Paper
       components:
+      - Gun
       - Anchorable # No structures, they won't fit in crates
       - Currency # No selling money.
       - SpaceGarbage
@@ -285,3 +285,8 @@
   components:
   - type: StationBusDepot
 
+- type: entity
+  id: BaseStationCryoTeleportation
+  abstract: true
+  components:
+  - type: StationCryoTeleportation

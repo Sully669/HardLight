@@ -22,3 +22,15 @@
     icon: Interface/Actions/nuts/nuts.png
     iconOn: Interface/Actions/nuts/nuts.png
     event: !type:SpriteStateToggleActionEvent
+
+- type: entity
+  id: ActionLewdLayEgg
+  name: Lay your eggs
+  description: Kneel and push with all your might.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    icon: { sprite: Objects/Consumable/Food/egg.rsi, state: icon }
+    useDelay: 5
+    event: !type:LewdEggLayingActionEvent
+

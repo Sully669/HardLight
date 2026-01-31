@@ -529,3 +529,350 @@ Entries:
       message: Adds the coyote clothes to the loudout options.
   id: 55
   time: '2026-01-17T19:20:23.0000000+00:00'
+- author: TrylobyteWasTaken
+  changes:
+    - type: Add
+      message: >-
+        New chemical, Alphoranthine.  Weak cellular healing, but cures the
+        'death' gene in plants.
+    - type: Add
+      message: >-
+        New chemical, Havokanthine.  Causes extremely rapid mutations in
+        anything.
+    - type: Tweak
+      message: Stellibinin now acts like Dylovene when given to plants.
+  id: 56
+  time: '2026-01-19T01:41:13.0000000+00:00'
+- author: warcrazed11
+  changes:
+    - type: Fix
+      message: Fixed vox breathing.
+  id: 57
+  time: '2026-01-19T02:43:10.0000000+00:00'
+- author: warcrazed11
+  changes:
+    - type: Fix
+      message: Fixed Dead Drop Reporting.
+    - type: Tweak
+      message: Make sec shipyards report to security comms instead of colsec.
+  id: 58
+  time: '2026-01-19T03:53:29.0000000+00:00'
+- author: rtasva
+  changes:
+    - type: Add
+      message: Ported Silica Station
+    - type: Tweak
+      message: Added Silica to the map pool
+  id: 59
+  time: '2026-01-19T04:07:57.0000000+00:00'
+- author: Tichi
+  changes:
+    - type: Add
+      message: Egg laying trait
+  id: 60
+  time: '2026-01-19T04:35:28.0000000+00:00'
+- author: Tichi
+  changes:
+    - type: Tweak
+      message: Let Harpy species have colorful skin color
+  id: 61
+  time: '2026-01-19T04:36:01.0000000+00:00'
+- author: warcrazed11
+  changes:
+    - type: Add
+      message: Adds the Admin tag and tags admin items.
+  id: 62
+  time: '2026-01-19T20:36:14.0000000+00:00'
+- author: Tichi
+  changes:
+    - type: Fix
+      message: Leash fixes
+  id: 63
+  time: '2026-01-22T04:37:24.0000000+00:00'
+- author: warcrazed11
+  changes:
+    - type: Add
+      message: Added basic tag lock system for clothing.
+  id: 64
+  time: '2026-01-22T04:37:59.0000000+00:00'
+- author: fenndragon
+  changes:
+    - type: Add
+      message: >-
+        Added back the vore system, this time ported from Coyote and
+        floof-station
+  id: 65
+  time: '2026-01-22T04:38:15.0000000+00:00'
+- author: fenndragon
+  changes:
+    - type: Add
+      message: Adds multiple optimizations
+    - type: Add
+      message: cyan lizard shunt
+    - type: Remove
+      message: Removed name limitations
+    - type: Tweak
+      message: tweaked event rolls and spawn rates
+    - type: Tweak
+      message: tweaked rules
+    - type: Fix
+      message: 'Fixed Atmos calculation and spacing. '
+  id: 66
+  time: '2026-01-22T05:16:51.0000000+00:00'
+- author: warcrazed11
+  changes:
+    - type: Tweak
+      message: Tweaked caches and dungeon spawn radius.
+    - type: Tweak
+      message: Tweaked cache and vault map to add more danger and loot to them.
+  id: 67
+  time: '2026-01-22T05:23:14.0000000+00:00'
+- author: rtasva
+  changes:
+    - type: Add
+      message: Ported numerous benches and sofas made by Conflee
+    - type: Add
+      message: Ported desktop PC consoles made by Citrea
+  id: 68
+  time: '2026-01-22T06:25:01.0000000+00:00'
+- author: NotLivyathan
+  changes:
+    - type: Add
+      message: Synths now feature built-in Binary comms that cannot be removed.
+    - type: Add
+      message: >-
+        Cyborgs now feature built-in frequencies relative to their chassis and
+        accept encryption keys for additional frequencies.
+    - type: Tweak
+      message: >-
+        Headsets no longer spawn with encryption keys, but now feature built-in
+        frequencies relative to the headset that cannot be removed, and still
+        accept encryption keys for additional frequencies.
+    - type: Tweak
+      message: Synths now correctly take barotrauma and bloodloss damage.
+    - type: Tweak
+      message: >-
+        Synth passive regen has been rebalanced to be less strong and no longer
+        functions while dead.
+    - type: Tweak
+      message: >-
+        Synth encryption keys (and intrinsic frequencies) are now able to be
+        seen on examine once their panels are open.
+    - type: Tweak
+      message: Nanites have been rebalanced slightly to be less strong.
+  id: 69
+  time: '2026-01-22T07:15:15.0000000+00:00'
+- author: NotLivyathan
+  changes:
+    - type: Add
+      message: >-
+        Reptilians now have two additional snout markings: Eastern Dragon &
+        Eastern Dragon (Usiki)
+  id: 70
+  time: '2026-01-24T06:40:45.0000000+00:00'
+- author: NotLivyathan
+  changes:
+    - type: Add
+      message: >-
+        Jump Boots are now able to be crafted at a protolathe after the
+        appropriate research has been done.
+  id: 71
+  time: '2026-01-24T07:00:22.0000000+00:00'
+- author: fenndragon
+  changes:
+    - type: Add
+      message: Added a bunch of optimization
+    - type: Add
+      message: Added various cleanup systems
+    - type: Add
+      message: Added Seed and plant stacking
+    - type: Add
+      message: 'Added THE PIRATES CODE '
+    - type: Fix
+      message: 'Fixed lingering maps and grids '
+  id: 72
+  time: '2026-01-24T11:41:17.0000000+00:00'
+- author: TheRealMasterChief117
+  changes:
+    - type: Tweak
+      message: >-
+        Changed how synths heal. They now heal based on their blood level, their
+        blood level dropping as they heal. As a result, their healing is more
+        powerful that scales based on their blood amount.
+  id: 73
+  time: '2026-01-25T06:52:35.0000000+00:00'
+- author: rtasva
+  changes:
+    - type: Add
+      message: Added Civimed vendors and some new furniture to Silica
+    - type: Tweak
+      message: 'temporarily rerouted disposals on Silica to accommodate collision bug '
+    - type: Fix
+      message: >-
+        Fixed warden locker & sec dock airlocks on Silica not being correct
+        prototypes
+  id: 74
+  time: '2026-01-25T09:27:27.0000000+00:00'
+- author: rtasva
+  changes:
+    - type: Add
+      message: ported too many clothes to list here
+  id: 75
+  time: '2026-01-25T09:27:51.0000000+00:00'
+- author: Generic_Eagle
+  changes:
+    - type: Fix
+      message: More improvements on Eaglerock
+  id: 76
+  time: '2026-01-25T09:29:37.0000000+00:00'
+- author: TrylobyteWasTaken
+  changes:
+    - type: Tweak
+      message: >-
+        You can now use an Automation Upgrade Kit on a material reclaimer to
+        allow for the automated removal of liquid via liquid pump.  Don't let it
+        eat your tools.
+  id: 77
+  time: '2026-01-25T09:32:35.0000000+00:00'
+- author: fenndragon
+  changes:
+    - type: Add
+      message: Added even more optimizations
+    - type: Add
+      message: added more dragons
+    - type: Add
+      message: added fish evolution
+    - type: Add
+      message: added new carp forms
+  id: 78
+  time: '2026-01-25T09:41:33.0000000+00:00'
+- author: rtasva
+  changes:
+    - type: Add
+      message: Added MNK vendors & Passion drobes to every station
+    - type: Tweak
+      message: More Silica fixes
+  id: 79
+  time: '2026-01-25T22:28:45.0000000+00:00'
+- author: fenndragon
+  changes:
+    - type: Fix
+      message: 'Fixed produce stacks not functioning properly in relation to machines. '
+  id: 80
+  time: '2026-01-28T04:43:46.0000000+00:00'
+- author: Generic_Eagle
+  changes:
+    - type: Add
+      message: Added a new area to Eaglerock with a reporter!
+    - type: Tweak
+      message: Eaglerock now has infinite contractor slots
+  id: 81
+  time: '2026-01-28T04:44:12.0000000+00:00'
+- author: warcrazed11
+  changes:
+    - type: Add
+      message: Added the ability to opt out of paradox clone targetting.
+  id: 82
+  time: '2026-01-28T04:44:52.0000000+00:00'
+- author: NotLivyathan
+  changes:
+    - type: Add
+      message: >-
+        Inert Nanites and active Nanites are now able to be created through
+        electrolysis.
+    - type: Add
+      message: Reagents within a cryostasis beaker now react through electrolysis.
+    - type: Tweak
+      message: >-
+        Synths now metabolize all reagents at 75% efficiency when dead, except
+        Nanites, which remain at 100% efficiency.
+  id: 83
+  time: '2026-01-28T04:46:13.0000000+00:00'
+- author: warcrazed11
+  changes:
+    - type: Tweak
+      message: Tweaked Station Payroll amount.
+    - type: Tweak
+      message: Doubled station terminal payouts.
+    - type: Tweak
+      message: Doubled Gas deposit size.
+  id: 84
+  time: '2026-01-30T17:10:02.0000000+00:00'
+- author: warcrazed11
+  changes:
+    - type: Add
+      message: Added AAC tablet!
+  id: 85
+  time: '2026-01-30T17:10:26.0000000+00:00'
+- author: NotLivyathan
+  changes:
+    - type: Add
+      message: Added Unborgable and Uncloneable traits from DeltaV.
+    - type: Remove
+      message: >-
+        Blacklisted Synths, IPC, and Cyborgs from several traits that didn't
+        make sense for them to have access to, including: Inoculated,
+        Unnatural/Natural Regeneration, Synthetic, Unrevivable (IPC), and Horny
+        (Synths).
+    - type: Remove
+      message: Cyborgs can no longer benefit from Unnatural Regeneration.
+    - type: Remove
+      message: Synths and IPC can no longer be cloned.
+  id: 86
+  time: '2026-01-30T17:11:20.0000000+00:00'
+- author: NotLivyathan
+  changes:
+    - type: Fix
+      message: >-
+        Fixed audio lingering from energy melee weapons when no longer
+        activated.
+  id: 87
+  time: '2026-01-30T17:11:38.0000000+00:00'
+- author: fenndragon
+  changes:
+    - type: Add
+      message: Added Expedition printer and disks
+    - type: Tweak
+      message: Changed roles so there is only one spacer role listed "freelancer"
+    - type: Remove
+      message: 'removed the contractor and pilot roles from station selection. '
+  id: 88
+  time: '2026-01-31T00:29:27.0000000+00:00'
+- author: TrylobyteWasTaken
+  changes:
+    - type: Tweak
+      message: >-
+        Stacked produce now splits itself when being inserted into a microwave,
+        electric range, or food-o-mat.
+    - type: Fix
+      message: You can cook food again.
+  id: 89
+  time: '2026-01-31T00:33:21.0000000+00:00'
+- author: Generic_Eagle
+  changes:
+    - type: Tweak
+      message: Eaglerock cargo can now sell exped disks
+  id: 90
+  time: '2026-01-31T02:16:11.0000000+00:00'
+- author: rtasva
+  changes:
+    - type: Add
+      message: added exped disk printer to every map
+  id: 91
+  time: '2026-01-31T03:17:31.0000000+00:00'
+- author: TrylobyteWasTaken
+  changes:
+    - type: Tweak
+      message: >-
+        Plant Analyzer now automatically refreshes if left open so you can watch
+        mutations in real-time.
+    - type: Tweak
+      message: >-
+        Plant Analyzer window now remains open even if you switch hands or put
+        it away.
+    - type: Fix
+      message: >-
+        Plant Analyzer UI now works properly when scanning an item without the
+        window already open.
+  id: 92
+  time: '2026-01-31T06:03:20.0000000+00:00'

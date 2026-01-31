@@ -20,7 +20,7 @@
         type: Add
       - !type:GenericStatusEffect
         key: PsionicsDisabled #Nyano - Summary: disables psinoics from being used by the wearer.
-        component: PsionicsDisabled #Nyano - Summary: see above. 
+        component: PsionicsDisabled #Nyano - Summary: see above.
         type: Add
     Alcohol:
       effects:
@@ -760,6 +760,10 @@
             type: Feroxi
           factor: 2
         - !type:ModifyBloodLevel
+          conditions:
+          - !type:OrganType # HardLight
+           type: Synth
+           shouldHave: false
           amount: 6
     Medicine: #Starlight
       metabolismRate: 0.5
@@ -768,6 +772,9 @@
           conditions:
           - !type:OrganType
            type: Avali
+           shouldHave: false
+          - !type:OrganType # HardLight
+           type: Synth
            shouldHave: false
           amount: 6
         - !type:ModifyBleedAmount
@@ -825,6 +832,11 @@
           min: 1
         reagent: Amatoxin
         amount: -3
+  plantMetabolism:
+  - !type:PlantAdjustToxins
+    amount: -10
+  - !type:PlantAdjustHealth
+    amount: 1
 
 - type: reagent
   id: Synaptizine

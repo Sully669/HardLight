@@ -75,7 +75,7 @@
       enum.ShipyardConsoleUiKey.Security:
         type: ShipyardConsoleBoundUserInterface
   - type: ShipyardConsole
-    shipyardChannel: Nfsd
+    shipyardChannel: Security
     newAccessLevels: [Captain, Security, Brig]
 
 - type: entity
@@ -102,7 +102,7 @@
       enum.ShipyardConsoleUiKey.Security:
         type: ShipyardConsoleBoundUserInterface
   - type: ShipyardConsole
-    shipyardChannel: Nfsd
+    shipyardChannel: Security
     newAccessLevels: [Captain, Security, Brig]
 
 - type: entity

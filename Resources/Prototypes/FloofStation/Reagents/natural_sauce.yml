@@ -11,6 +11,7 @@
   metabolisms:
     Drink:
       effects:
+      - !type:Inseminate
       - !type:SatiateThirst
         factor: 0.2
       - !type:SatiateHunger
