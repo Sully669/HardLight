@@ -33,7 +33,8 @@
     - BaseStationSiliconLawFrontierStation
     - BaseStationRenameWarpPoints
     - BaseStationMail
-    - BaseStationCargoMarket
+    # - BaseStationCargoMarket # bugged
+    - BaseStationCryoTeleportation
   categories: [ HideSpawnMenu ]
   components:
     - type: Transform
@@ -44,6 +45,7 @@
     - BaseStation
     - BaseStationAlertLevels
     - BaseStationNanotrasen
+    - BaseStationCryoTeleportation
   categories: [ HideSpawnMenu ]
   components:
     - type: Transform

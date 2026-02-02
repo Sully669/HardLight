@@ -21,6 +21,7 @@
         color: "#8afffd"
   - type: ZombieImmune
   - type: Sanitized
+  - type: Uncloneable
   - type: Puller
     needsHands: false
   - type: HumanoidAppearance
@@ -34,7 +35,7 @@
     animation: WeaponArcFist
     damage:
       types:
-        Blunt: 8 # Synthetic muscles hit hard.
+        Blunt: 8 # Synths hit hard.
   - type: Inventory
     speciesId: synth
     displacements:
@@ -95,21 +96,31 @@
   - type: EncryptionKeyHolder
     keySlots: 10
     examineWhileLocked: false
+    preserveExistingChannels: true
+    intrinsicChannels:
+    - Binary
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
+    intrinsicChannels:
+    - Binary
   - type: ActiveRadio
+    intrinsicChannels:
+    - Binary
   - type: Bloodstream
     bloodReagent: InertNanites
     bloodRefreshAmount: 0.0
-  - type: PassiveDamage
+  - type: HLBloodLevelPassiveDamage
     allowedStates:
     - Alive
     - Critical
-    - Dead
+    allowedDamageGroups:
+    - Brute
+    - Burn
+    bloodLevelDecrease: 1.1
     damage:
       groups:
-        Brute: -3
-        Burn: -4
+        Brute: -7
+        Burn: -7
   - type: BlockInjection
     blockHypospray: true
     blockInjectOnProjectile: true
@@ -125,7 +136,7 @@
   - type: Barotrauma
     damage:
       types:
-        Blunt: 0.15 #per second, scales with pressure and other constants.
+        Blunt: 0.3 #per second, scales with pressure and other constants.
   - type: TemperatureSpeed
     thresholds:
       100: 0.7

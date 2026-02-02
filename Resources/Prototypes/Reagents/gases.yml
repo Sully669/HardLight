@@ -107,8 +107,6 @@
           Oxygen: -1.0
       - !type:HealthChange
         conditions:
-        - !type:OrganType
-          type: Vox
         - !type:OrganType # Funkystation - Genetics
           type: PlasmaBreather
         scaleByQuantity: true
@@ -122,10 +120,27 @@
         conditions:
           - !type:ReagentThreshold
             min: 0.5
-          - !type:OrganType
-            type: Vox
           - !type:OrganType # Funkystation - Genetics
             type: PlasmaBreather
+        clear: true
+        time: 5
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType
+          type: Vox
+        scaleByQuantity: true
+        ignoreResistances: true
+        damage:
+          types:
+            Poison:
+              7
+      - !type:AdjustAlert
+        alertType: Toxins
+        conditions:
+          - !type:ReagentThreshold
+            min: 0.5
+          - !type:OrganType
+            type: Vox
         clear: true
         time: 5
         # Frontier: Sheleg start block
@@ -194,9 +209,6 @@
             min: 1.5
           - !type:OrganType #imp, thaven can breathe all gases safely
             type: Thaven
-            shouldHave: false
-          - !type:OrganType # Funkystation - Genetics Plasma breather lungs
-            type: PlasmaBreather
             shouldHave: false
         clear: True
         time: 5
