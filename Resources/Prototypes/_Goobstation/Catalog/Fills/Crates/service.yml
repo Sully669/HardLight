@@ -24,6 +24,22 @@
         - !type:NestedSelector
           tableId: RandomVinylSleeve
 
+- type: entity
+  id: CrateRadioStationVinyls5
+  parent: CrateGenericSteel
+  name:  5 vinyls crate
+  description: A crate with 5 random vinyls to play with the vinyl player. Collect them all!
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - !type:NestedSelector
+          tableId: RandomVinylSleeve
+          rolls: !type:ConstantNumberSelector
+            value: 5
+
+
 - type: entityTable
   id: RandomCDDisk
   table: !type:AllSelector
