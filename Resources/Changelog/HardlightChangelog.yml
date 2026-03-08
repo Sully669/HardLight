@@ -1585,3 +1585,73 @@ Entries:
       message: 'term loose to hazard category in AAC tablet '
   id: 171
   time: '2026-03-03T08:34:53.0000000+00:00'
+- author: NotLivyathan
+  changes:
+    - type: Add
+      message: Added a placeholder system for Patreon supporter custom entities.
+  id: 172
+  time: '2026-03-05T22:29:36.0000000+00:00'
+- author: Sully669
+  changes:
+    - type: Add
+      message: Added Interdyne defibrillator
+    - type: Tweak
+      message: reduced Interdyne hypospray volume from 60 to 45
+    - type: Fix
+      message: fixed contraband level on Interdyne hypospray to be C2
+  id: 173
+  time: '2026-03-06T06:27:26.0000000+00:00'
+- author: Nikode16
+  changes:
+    - type: Add
+      message: Colonial Engineer Job Title
+    - type: Add
+      message: CYN's own Colonial Command Outfit
+    - type: Add
+      message: ColComm's own Manica
+    - type: Add
+      message: New Disposable Light, Mime, and Bible Implanters
+    - type: Add
+      message: Antique ColSec HoloBarrier and SecLight Items
+    - type: Add
+      message: ColComm Engineering Hardsuit
+    - type: Add
+      message: Liquid Nitrogen Filled Black Jetpack
+    - type: Add
+      message: Eidolon Mercenary Airlock _(These weren't added by accident by Valor)_
+  id: 174
+  time: '2026-03-06T06:28:04.0000000+00:00'
+- author: Nikode16
+  changes:
+    - type: Fix
+      message: >-
+        Handheld Artifact Container now has AA instead of Sci & Cargo Access
+        akin to the Big Version
+  id: 175
+  time: '2026-03-06T06:31:12.0000000+00:00'
+- author: NotLivyathan
+  changes:
+    - type: Add
+      message: Contraband detectors can now be constructed.
+  id: 176
+  time: '2026-03-06T06:38:14.0000000+00:00'
+- author: Sully669
+  changes:
+    - type: Fix
+      message: job role supervisors
+  id: 177
+  time: '2026-03-06T22:19:45.0000000+00:00'
+- author: VoidedDevNull
+  changes:
+    - type: Add
+      message: Added radio station room to Amber
+    - type: Add
+      message: Added radio station room to Hardlight Core
+    - type: Tweak
+      message: >-
+        Increased audio playing distance of both vinyl players and radio
+        receivers to 7.5 and 8.5 tiles respectively
+    - type: Add
+      message: Added radio receiver flatpack to the entity spawn menu
+  id: 178
+  time: '2026-03-06T22:20:20.0000000+00:00'

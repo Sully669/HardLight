@@ -91,12 +91,6 @@ public sealed class CryoTeleportationSystem : EntitySystem
             _audio.PlayPvs(stationComp.TransferSound, portalUid);
             
             var container = _container.EnsureContainer<ContainerSlot>(cryoStorage.Value, "storage");
-
-            if (TerminatingOrDeleted(uid)
-                || TerminatingOrDeleted(container.Owner))
-            {
-                continue;
-            }
             
             if (!_container.Insert(uid, container))
                 _cryostorage.HandleEnterCryostorage((uid, containedComp), comp.UserId);
@@ -153,9 +147,6 @@ public sealed class CryoTeleportationSystem : EntitySystem
         var query = AllEntityQuery<CryostorageComponent, TransformComponent>();
         while (query.MoveNext(out var cryoUid, out _, out var cryoTransform))
         {
-            if (TerminatingOrDeleted(cryoUid))
-                continue;
-
             if (stationGridTransform.MapUid != cryoTransform.MapUid)
                 continue;
             

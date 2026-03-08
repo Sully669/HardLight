@@ -51,7 +51,7 @@ namespace Content.Server.Chemistry.EntitySystems
             SubscribeLocalEvent<ChemMasterComponent, EntInsertedIntoContainerMessage>(SubscribeUpdateUiState);
             SubscribeLocalEvent<ChemMasterComponent, EntRemovedFromContainerMessage>(SubscribeUpdateUiState);
             SubscribeLocalEvent<ChemMasterComponent, BoundUIOpenedEvent>(SubscribeUpdateUiState);
-            
+
             // NEW: Subscribe to MapInit to verify solution integrity after load
             SubscribeLocalEvent<ChemMasterComponent, MapInitEvent>(OnChemMasterMapInit);
 
@@ -69,10 +69,10 @@ namespace Content.Server.Chemistry.EntitySystems
             // Log the buffer contents for debugging
             if (_solutionContainerSystem.TryGetSolution(ent.Owner, SharedChemMaster.BufferSolutionName, out _, out var bufferSolution))
             {
-                Logger.GetSawmill("hardlight").Info($"ChemMaster {ent.Owner} loaded with buffer: {bufferSolution.Volume}u, {bufferSolution.Contents.Count} reagent types");
+                Logger.Info($"ChemMaster {ent.Owner} loaded with buffer: {bufferSolution.Volume}u, {bufferSolution.Contents.Count} reagent types");
                 foreach (var reagent in bufferSolution.Contents)
                 {
-                    Logger.GetSawmill("hardlight").Info($"  - {reagent.Reagent.Prototype}: {reagent.Quantity}u");
+                    Logger.Info($"  - {reagent.Reagent.Prototype}: {reagent.Quantity}u");
                 }
             }
         }
@@ -351,6 +351,12 @@ namespace Content.Server.Chemistry.EntitySystems
             }
 
             if (!TryComp(container, out StorageComponent? storage))
+                return null;
+
+            // HardLight: Null check to prevent ship load failures when the output slot contains a pill bottle.
+            // I assume ChemMasters attempt to load the contents of the pill bottle before the container itself,
+            // which is obviously impossible if true and thus results in a fail.
+            if (storage.Container == null)
                 return null;
 
             var pills = storage.Container.ContainedEntities.Select((Func<EntityUid, (string, FixedPoint2 quantity)>) (pill =>
