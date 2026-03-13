@@ -1,0 +1,57 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "created by mocha_rosensteel on discord.",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "icon-flash"
+        },
+        {
+            "name": "equipped-HELMET-off",
+            "directions": 4
+        },
+        {
+            "name": "equipped-HELMET-on",
+            "directions": 4
+        },
+        {
+            "name": "equipped-HELMET-avali-off",
+            "directions": 4
+        },
+        {
+            "name": "equipped-HELMET-avali-on",
+            "directions": 4
+        },
+        {
+            "name": "equipped-HELMET-reptilian-off",
+            "directions": 4
+        },
+        {
+            "name": "equipped-HELMET-reptilian-on",
+            "directions": 4
+        },
+        {
+            "name": "equipped-HELMET-resomi-off",
+            "directions": 4
+        },
+        {
+            "name": "equipped-HELMET-resomi-on",
+            "directions": 4
+        },
+        {
+            "name": "equipped-HELMET-vox-off",
+            "directions": 4
+        },
+        {
+            "name": "equipped-HELMET-vox-on",
+            "directions": 4
+        }
+    ]
+}
