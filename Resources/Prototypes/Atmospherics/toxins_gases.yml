@@ -1,0 +1,261 @@
+- type: gas
+  id: 149
+  name: gases-toxin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: cf3600
+  reagent: Toxin
+
+- type: gas
+  id: 150
+  name: gases-carpotoxin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: e2a38c
+  reagent: CarpoToxin
+
+- type: gas
+  id: 151
+  name: gases-chloralhydrate
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 000067
+  reagent: ChloralHydrate
+
+- type: gas
+  id: 152
+  name: gases-gastrotoxin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: acc91a
+  reagent: GastroToxin
+
+- type: gas
+  id: 153
+  name: gases-mold
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 8a9a5b
+  reagent: Mold
+
+- type: gas
+  id: 154
+  name: gases-polytrinicacid
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: a1000b
+  reagent: PolytrinicAcid
+
+- type: gas
+  id: 155
+  name: gases-ferrochromicacid
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 48b3b8
+  reagent: FerrochromicAcid
+
+- type: gas
+  id: 156
+  name: gases-fluorosulfuricacid
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 5050ff
+  reagent: FluorosulfuricAcid
+
+- type: gas
+  id: 157
+  name: gases-sulfuricacid
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: BF8C00
+  reagent: SulfuricAcid
+
+- type: gas
+  id: 158
+  name: gases-unstablemutagen
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 00ff5f
+  reagent: UnstableMutagen
+
+- type: gas
+  id: 159
+  name: gases-heartbreakertoxin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 5f959c
+  reagent: HeartbreakerToxin
+
+- type: gas
+  id: 160
+  name: gases-lexorin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 6b0007
+  reagent: Lexorin
+
+- type: gas
+  id: 161
+  name: gases-mindbreakertoxin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 77b58e
+  reagent: MindbreakerToxin
+
+- type: gas
+  id: 162
+  name: gases-histamine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FA6464
+  reagent: Histamine
+
+- type: gas
+  id: 163
+  name: gases-theobromine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: f5f5f5
+  reagent: Theobromine
+
+- type: gas
+  id: 164
+  name: gases-amatoxin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: D6CE7B
+  reagent: Amatoxin
+
+- type: gas
+  id: 165
+  name: gases-ventcrud
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 000000
+  reagent: VentCrud
+
+- type: gas
+  id: 166
+  name: gases-romerol
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 7e916e
+  reagent: Romerol
+
+- type: gas
+  id: 167
+  name: gases-uncookedanimalproteins
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FFFFE5
+  reagent: UncookedAnimalProteins
+
+- type: gas
+  id: 168
+  name: gases-allicin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: F2E9D2
+  reagent: Allicin
+
+- type: gas
+  id: 169
+  name: gases-pax
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: AAAAAA
+  reagent: Pax
+
+- type: gas
+  id: 170
+  name: gases-honk
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: F2E9D2
+  reagent: Honk
+
+- type: gas
+  id: 171
+  name: gases-lead
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 5C6274
+  reagent: Lead
+
+- type: gas
+  id: 172
+  name: gases-bungotoxin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: EBFF8E
+  reagent: Bungotoxin
+
+- type: gas
+  id: 173
+  name: gases-vestine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 435166
+  reagent: Vestine
+
+- type: gas
+  id: 174
+  name: gases-tazinide
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FDD023
+  reagent: Tazinide
+
+- type: gas
+  id: 175
+  name: gases-lipolicide
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: F0FFF0
+  reagent: Lipolicide
+
+- type: gas
+  id: 176
+  name: gases-mechanotoxin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 00b408
+  reagent: Mechanotoxin
+
+- type: gas
+  id: 177
+  name: gases-toxintrash
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FFFFFF
+  reagent: ToxinTrash
+

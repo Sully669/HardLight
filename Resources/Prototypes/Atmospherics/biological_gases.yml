@@ -1,0 +1,108 @@
+- type: gas
+  id: 9
+  name: gases-blood
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 800000
+  reagent: Blood
+
+- type: gas
+  id: 10
+  name: gases-insectblood
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 808A51
+  reagent: InsectBlood
+
+- type: gas
+  id: 11
+  name: gases-slime
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 2cf274
+  reagent: Slime
+
+- type: gas
+  id: 12
+  name: gases-sap
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: cd7314
+  reagent: Sap
+
+- type: gas
+  id: 13
+  name: gases-copperblood
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 162581
+  reagent: CopperBlood
+
+- type: gas
+  id: 14
+  name: gases-ammoniablood
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 7a8bf2
+  reagent: AmmoniaBlood
+
+- type: gas
+  id: 15
+  name: gases-zombieblood
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 2b0700
+  reagent: ZombieBlood
+
+- type: gas
+  id: 16
+  name: gases-ichor
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: f4692e
+  reagent: Ichor
+
+- type: gas
+  id: 17
+  name: gases-fat
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: d8d8b0
+  reagent: Fat
+
+- type: gas
+  id: 18
+  name: gases-vomit
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 87ab08
+  reagent: Vomit
+
+- type: gas
+  id: 19
+  name: gases-greymatter
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: C584B8
+  reagent: GreyMatter
+
+- type: gas
+  id: 20
+  name: gases-bloodblack
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 000000
+  reagent: BloodBlack
+

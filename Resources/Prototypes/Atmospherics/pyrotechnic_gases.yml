@@ -1,0 +1,72 @@
+- type: gas
+  id: 141
+  name: gases-basepyrotechnic
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FFFFFF
+  reagent: BasePyrotechnic
+
+- type: gas
+  id: 142
+  name: gases-thermite
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 757245
+  reagent: Thermite
+
+- type: gas
+  id: 143
+  name: gases-napalm
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FA00AF
+  reagent: Napalm
+
+- type: gas
+  id: 144
+  name: gases-phlogiston
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: D4872A
+  reagent: Phlogiston
+
+- type: gas
+  id: 145
+  name: gases-chlorinetrifluoride
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FFC8C8
+  reagent: ChlorineTrifluoride
+
+- type: gas
+  id: 146
+  name: gases-foamingagent
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 215263
+  reagent: FoamingAgent
+
+- type: gas
+  id: 147
+  name: gases-weldingfuel
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: a76b1c
+  reagent: WeldingFuel
+
+- type: gas
+  id: 148
+  name: gases-fluorosurfactant
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 9e6b38
+  reagent: Fluorosurfactant
+

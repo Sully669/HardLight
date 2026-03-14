@@ -1,0 +1,117 @@
+- type: gas
+  id: 128
+  name: gases-desoxyephedrine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FAFAFA
+  reagent: Desoxyephedrine
+
+- type: gas
+  id: 129
+  name: gases-ephedrine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: D2FFFA
+  reagent: Ephedrine
+
+- type: gas
+  id: 130
+  name: gases-stimulants
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 9A040E
+  reagent: Stimulants
+
+- type: gas
+  id: 131
+  name: gases-thc
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 808080
+  reagent: THC
+
+- type: gas
+  id: 132
+  name: gases-nicotine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: C0C0C0
+  reagent: Nicotine
+
+- type: gas
+  id: 133
+  name: gases-impedrezene
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 215263
+  reagent: Impedrezene
+
+- type: gas
+  id: 134
+  name: gases-spacedrugs
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 63806e
+  reagent: SpaceDrugs
+
+- type: gas
+  id: 135
+  name: gases-bananadine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: ffff00
+  reagent: Bananadine
+
+- type: gas
+  id: 136
+  name: gases-nocturine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 128e80
+  reagent: Nocturine
+
+- type: gas
+  id: 137
+  name: gases-mutetoxin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 000000
+  reagent: MuteToxin
+
+- type: gas
+  id: 138
+  name: gases-norepinephricacid
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 96a8b5
+  reagent: NorepinephricAcid
+
+- type: gas
+  id: 139
+  name: gases-teargas
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 96a8b5
+  reagent: TearGas
+
+- type: gas
+  id: 140
+  name: gases-happiness
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: EE35FF
+  reagent: Happiness
+

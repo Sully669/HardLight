@@ -1,0 +1,72 @@
+- type: gas
+  id: 21
+  name: gases-eznutrient
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 664330
+  reagent: EZNutrient
+
+- type: gas
+  id: 22
+  name: gases-left4zed
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 5b406c
+  reagent: Left4Zed
+
+- type: gas
+  id: 23
+  name: gases-pestkiller
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 9e9886
+  reagent: PestKiller
+
+- type: gas
+  id: 24
+  name: gases-plantbgone
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 49002E
+  reagent: PlantBGone
+
+- type: gas
+  id: 25
+  name: gases-robustharvest
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 3e901c
+  reagent: RobustHarvest
+
+- type: gas
+  id: 26
+  name: gases-sedin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 3CB371
+  reagent: Sedin
+
+- type: gas
+  id: 27
+  name: gases-weedkiller
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 968395
+  reagent: WeedKiller
+
+- type: gas
+  id: 28
+  name: gases-diethylamine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: a1000b
+  reagent: Diethylamine
+

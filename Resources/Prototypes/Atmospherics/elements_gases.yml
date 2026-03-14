@@ -1,0 +1,180 @@
+- type: gas
+  id: 47
+  name: gases-aluminium
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 848789
+  reagent: Aluminium
+
+- type: gas
+  id: 48
+  name: gases-carbon
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 22282b
+  reagent: Carbon
+
+- type: gas
+  id: 49
+  name: gases-chlorine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: a2ff00
+  reagent: Chlorine
+
+- type: gas
+  id: 50
+  name: gases-copper
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: b05b3c
+  reagent: Copper
+
+- type: gas
+  id: 51
+  name: gases-fluorine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: ba85cc
+  reagent: Fluorine
+
+- type: gas
+  id: 52
+  name: gases-gold
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: F7C430
+  reagent: Gold
+
+- type: gas
+  id: 53
+  name: gases-hydrogen
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: cccccc
+  reagent: Hydrogen
+
+- type: gas
+  id: 54
+  name: gases-iodine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: BC8A00
+  reagent: Iodine
+
+- type: gas
+  id: 55
+  name: gases-iron
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 434b4d
+  reagent: Iron
+
+- type: gas
+  id: 56
+  name: gases-lithium
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: d6c0a7
+  reagent: Lithium
+
+- type: gas
+  id: 57
+  name: gases-mercury
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 929296
+  reagent: Mercury
+
+- type: gas
+  id: 58
+  name: gases-potassium
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: c6c8cc
+  reagent: Potassium
+
+- type: gas
+  id: 59
+  name: gases-phosphorus
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: f5da9a
+  reagent: Phosphorus
+
+- type: gas
+  id: 60
+  name: gases-radium
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 00ff04
+  reagent: Radium
+
+- type: gas
+  id: 61
+  name: gases-silicon
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 364266
+  reagent: Silicon
+
+- type: gas
+  id: 62
+  name: gases-silver
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: d0d0d0
+  reagent: Silver
+
+- type: gas
+  id: 63
+  name: gases-sulfur
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: fff385
+  reagent: Sulfur
+
+- type: gas
+  id: 64
+  name: gases-sodium
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: a7b3d6
+  reagent: Sodium
+
+- type: gas
+  id: 65
+  name: gases-uranium
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 8fa191
+  reagent: Uranium
+
+- type: gas
+  id: 66
+  name: gases-zinc
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: bababa
+  reagent: Zinc
+

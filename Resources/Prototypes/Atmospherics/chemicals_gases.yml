@@ -1,0 +1,117 @@
+- type: gas
+  id: 29
+  name: gases-acetone
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: AF14B7
+  reagent: Acetone
+
+- type: gas
+  id: 30
+  name: gases-phenol
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: E7EA91
+  reagent: Phenol
+
+- type: gas
+  id: 31
+  name: gases-charcoal
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 22282b
+  reagent: Charcoal
+
+- type: gas
+  id: 32
+  name: gases-ash
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FFFFFF
+  reagent: Ash
+
+- type: gas
+  id: 33
+  name: gases-sodiumcarbonate
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FFFFFF
+  reagent: SodiumCarbonate
+
+- type: gas
+  id: 34
+  name: gases-artifexium
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 776291
+  reagent: Artifexium
+
+- type: gas
+  id: 35
+  name: gases-benzene
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: E7EA91
+  reagent: Benzene
+
+- type: gas
+  id: 36
+  name: gases-hydroxide
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FFFFFF
+  reagent: Hydroxide
+
+- type: gas
+  id: 37
+  name: gases-sodiumhydroxide
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FFFFFF
+  reagent: SodiumHydroxide
+
+- type: gas
+  id: 38
+  name: gases-fersilicite
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 434b4d
+  reagent: Fersilicite
+
+- type: gas
+  id: 39
+  name: gases-sodiumpolyacrylate
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: F0F0F0
+  reagent: SodiumPolyacrylate
+
+- type: gas
+  id: 40
+  name: gases-cellulose
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: E6E6DA
+  reagent: Cellulose
+
+- type: gas
+  id: 41
+  name: gases-rororium
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: bf1365
+  reagent: Rororium
+

@@ -1,0 +1,117 @@
+- type: gas
+  id: 67
+  name: gases-carpetium
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 800000
+  reagent: Carpetium
+
+- type: gas
+  id: 68
+  name: gases-fiber
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 808080
+  reagent: Fiber
+
+- type: gas
+  id: 69
+  name: gases-buzzochloricbees
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FFD35D
+  reagent: BuzzochloricBees
+
+- type: gas
+  id: 70
+  name: gases-groundbee
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 86530E
+  reagent: GroundBee
+
+- type: gas
+  id: 71
+  name: gases-saxoite
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: B8A603
+  reagent: Saxoite
+
+- type: gas
+  id: 72
+  name: gases-licoxide
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FDD023
+  reagent: Licoxide
+
+- type: gas
+  id: 73
+  name: gases-razorium
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: e3fffb
+  reagent: Razorium
+
+- type: gas
+  id: 74
+  name: gases-fresium
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: b3f1ff
+  reagent: Fresium
+
+- type: gas
+  id: 75
+  name: gases-fresiumwizard
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: b3f1ff
+  reagent: FresiumWizard
+
+- type: gas
+  id: 76
+  name: gases-fresiumchaplain
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 1e0036
+  reagent: FresiumChaplain
+
+- type: gas
+  id: 77
+  name: gases-laughter
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FF4DD2
+  reagent: Laughter
+
+- type: gas
+  id: 78
+  name: gases-juicethatmakesyouweh
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 59b23a
+  reagent: JuiceThatMakesYouWeh
+
+- type: gas
+  id: 79
+  name: gases-juicethatmakesyouhew
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: a64dc5
+  reagent: JuiceThatMakesYouHew
+

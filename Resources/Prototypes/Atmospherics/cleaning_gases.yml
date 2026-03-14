@@ -1,0 +1,45 @@
+- type: gas
+  id: 42
+  name: gases-bleach
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: a1000b
+  reagent: Bleach
+
+- type: gas
+  id: 43
+  name: gases-spacecleaner
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: c8ff69
+  reagent: SpaceCleaner
+
+- type: gas
+  id: 44
+  name: gases-soapreagent
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: c8dfc9
+  reagent: SoapReagent
+
+- type: gas
+  id: 45
+  name: gases-spacelube
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 77b58e
+  reagent: SpaceLube
+
+- type: gas
+  id: 46
+  name: gases-spaceglue
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: ffffff
+  reagent: SpaceGlue
+

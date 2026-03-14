@@ -1,0 +1,432 @@
+- type: gas
+  id: 80
+  name: gases-cryptobiolin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 081a80
+  reagent: Cryptobiolin
+
+- type: gas
+  id: 81
+  name: gases-dylovene
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 3a1d8a
+  reagent: Dylovene
+
+- type: gas
+  id: 82
+  name: gases-diphenhydramine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 64ffe6
+  reagent: Diphenhydramine
+
+- type: gas
+  id: 83
+  name: gases-ethylredoxrazine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 2d5708
+  reagent: Ethylredoxrazine
+
+- type: gas
+  id: 84
+  name: gases-arithrazine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: bd5902
+  reagent: Arithrazine
+
+- type: gas
+  id: 85
+  name: gases-bicaridine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: ffaa00
+  reagent: Bicaridine
+
+- type: gas
+  id: 86
+  name: gases-cryoxadone
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 0091ff
+  reagent: Cryoxadone
+
+- type: gas
+  id: 87
+  name: gases-doxarubixadone
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 32cd32
+  reagent: Doxarubixadone
+
+- type: gas
+  id: 88
+  name: gases-dermaline
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 215263
+  reagent: Dermaline
+
+- type: gas
+  id: 89
+  name: gases-dexalin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 0041a8
+  reagent: Dexalin
+
+- type: gas
+  id: 90
+  name: gases-dexalinplus
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 4da0bd
+  reagent: DexalinPlus
+
+- type: gas
+  id: 91
+  name: gases-epinephrine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: d2fffa
+  reagent: Epinephrine
+
+- type: gas
+  id: 92
+  name: gases-hyronalin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 4cb580
+  reagent: Hyronalin
+
+- type: gas
+  id: 93
+  name: gases-ipecac
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 422912
+  reagent: Ipecac
+
+- type: gas
+  id: 94
+  name: gases-inaprovaline
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 731024
+  reagent: Inaprovaline
+
+- type: gas
+  id: 95
+  name: gases-kelotane
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: bf3d19
+  reagent: Kelotane
+
+- type: gas
+  id: 96
+  name: gases-leporazine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: ff7db5
+  reagent: Leporazine
+
+- type: gas
+  id: 97
+  name: gases-barozine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: ff867d
+  reagent: Barozine
+
+- type: gas
+  id: 98
+  name: gases-phalanximine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: c8ff75
+  reagent: Phalanximine
+
+- type: gas
+  id: 99
+  name: gases-polypyryliumoligomers
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 9423FF
+  reagent: PolypyryliumOligomers
+
+- type: gas
+  id: 100
+  name: gases-ambuzol
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 86caf7
+  reagent: Ambuzol
+
+- type: gas
+  id: 101
+  name: gases-ambuzolplus
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 1274b5
+  reagent: AmbuzolPlus
+
+- type: gas
+  id: 102
+  name: gases-pulpedbananapeel
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: FFE774
+  reagent: PulpedBananaPeel
+
+- type: gas
+  id: 103
+  name: gases-saline
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 0064C8
+  reagent: Saline
+
+- type: gas
+  id: 104
+  name: gases-siderlac
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: f4dab8
+  reagent: Siderlac
+
+- type: gas
+  id: 105
+  name: gases-stellibinin
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 2b2f77
+  reagent: Stellibinin
+
+- type: gas
+  id: 106
+  name: gases-synaptizine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: d49a2f
+  reagent: Synaptizine
+
+- type: gas
+  id: 107
+  name: gases-tranexamicacid
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: ba7d7d
+  reagent: TranexamicAcid
+
+- type: gas
+  id: 108
+  name: gases-tricordrazine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 00e5ff
+  reagent: Tricordrazine
+
+- type: gas
+  id: 109
+  name: gases-lipozine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 2690b5
+  reagent: Lipozine
+
+- type: gas
+  id: 110
+  name: gases-omnizine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: fcf7f9
+  reagent: Omnizine
+
+- type: gas
+  id: 111
+  name: gases-ultravasculine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 520e30
+  reagent: Ultravasculine
+
+- type: gas
+  id: 112
+  name: gases-oculine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 404040
+  reagent: Oculine
+
+- type: gas
+  id: 113
+  name: gases-cognizine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: b50ee8
+  reagent: Cognizine
+
+- type: gas
+  id: 114
+  name: gases-ethyloxyephedrine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: d5d5e4
+  reagent: Ethyloxyephedrine
+
+- type: gas
+  id: 115
+  name: gases-diphenylmethylamine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: b0abaa
+  reagent: Diphenylmethylamine
+
+- type: gas
+  id: 116
+  name: gases-sigynate
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: e0a5b9
+  reagent: Sigynate
+
+- type: gas
+  id: 117
+  name: gases-lacerinol
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 283332
+  reagent: Lacerinol
+
+- type: gas
+  id: 118
+  name: gases-puncturase
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: b9bf93
+  reagent: Puncturase
+
+- type: gas
+  id: 119
+  name: gases-bruizine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: ff3636
+  reagent: Bruizine
+
+- type: gas
+  id: 120
+  name: gases-holywater
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 91C3F7
+  reagent: Holywater
+
+- type: gas
+  id: 121
+  name: gases-pyrazine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: aa4308
+  reagent: Pyrazine
+
+- type: gas
+  id: 122
+  name: gases-insuzine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 8147ff
+  reagent: Insuzine
+
+- type: gas
+  id: 123
+  name: gases-opporozidone
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: b5e36d
+  reagent: Opporozidone
+
+- type: gas
+  id: 124
+  name: gases-necrosol
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 86a5bd
+  reagent: Necrosol
+
+- type: gas
+  id: 125
+  name: gases-psicodine
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 07E79E
+  reagent: Psicodine
+
+- type: gas
+  id: 126
+  name: gases-potassiumiodide
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: baa15d
+  reagent: PotassiumIodide
+
+- type: gas
+  id: 127
+  name: gases-haloperidol
+  specificHeat: 20
+  heatCapacityRatio: 1.4
+  molarMass: 30
+  color: 27870a
+  reagent: Haloperidol
+
