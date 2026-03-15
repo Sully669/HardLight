@@ -76,10 +76,10 @@
   copyright: "Scratch Post by Ghirardelli7 on SoundCloud, used with the understanding that credit is given to the artist."
   source: "https://soundcloud.com/ghirardelli7/scratch-post-ost"
 
-- files: ["shibamata-MONO.ogg"]
-  license: "Custom"
-  copyright: "Shibamata by .2gou / Dot Nigou. This track is not released under any formal licensure, and exists in the public domain in multiple forms, including remixes and mashups. Converted to mono."
-  source: "https://www.youtube.com/watch?v=FIw-HUP7XK0"
+#- files: ["shibamata-MONO.ogg"]
+#  license: "Custom"
+#  copyright: "Shibamata by .2gou / Dot Nigou. This track is not released under any formal licensure, and exists in the public domain in multiple forms, including remixes and mashups. Converted to mono."
+#  source: "https://www.youtube.com/watch?v=FIw-HUP7XK0"
 
 - files: ["space_asshole.ogg"]
   license: "Custom"
