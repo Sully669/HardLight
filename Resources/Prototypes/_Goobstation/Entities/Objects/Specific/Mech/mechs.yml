@@ -133,7 +133,7 @@
         Blunt: 26
   - type: MovementSpeedModifier
     baseWalkSpeed: 3
-    baseSprintSpeed: 5
+    baseSprintSpeed: 6 #HL
   - type: CanMoveInAir
   - type: MovementAlwaysTouching
   - type: StaticPrice
@@ -206,8 +206,8 @@
   - type: CanMoveInAir
   - type: MovementAlwaysTouching
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1
-    baseSprintSpeed: 2
+    baseWalkSpeed: 5 #HL
+    baseSprintSpeed: 7 #HL
     baseWeightlessModifier: 3
   - type: StaticPrice
     price: 3000
@@ -265,8 +265,8 @@
         Blunt: 40
         Structural: 220
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1
-    baseSprintSpeed: 2
+    baseWalkSpeed: 3 #HL
+    baseSprintSpeed: 4 #HL
     baseWeightlessModifier: 2
   - type: Damageable
     damageModifierSet: MediumArmorNT
@@ -334,8 +334,8 @@
         Blunt: 40
         Structural: 200
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1
-    baseSprintSpeed: 2
+    baseWalkSpeed: 3 #HL
+    baseSprintSpeed: 4 #HL
     baseWeightlessModifier: 2
   - type: Damageable
     damageModifierSet: HeavyArmorNT
@@ -408,8 +408,8 @@
         Blunt: 60
         Structural: 400
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1
-    baseSprintSpeed: 2
+    baseWalkSpeed: 3 #HL
+    baseSprintSpeed: 4 #HL
     baseWeightlessModifier: 4
   - type: Damageable
     damageModifierSet: HeavyArmorNT
@@ -485,8 +485,8 @@
         Blunt: 30
         Structural: 200
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1
-    baseSprintSpeed: 2
+    baseWalkSpeed: 7 #HL
+    baseSprintSpeed: 5 #HL
     baseWeightlessModifier: 3
   - type: Damageable
     damageModifierSet: MediumArmorSyndi
@@ -559,8 +559,8 @@
         Blunt: 50
         Structural: 400
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1
-    baseSprintSpeed: 2
+    baseWalkSpeed: 3 #HL
+    baseSprintSpeed: 4 #HL
     baseWeightlessModifier: 2
   - type: Damageable
     damageModifierSet: HeavyArmorSyndi
