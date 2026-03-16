@@ -212,14 +212,14 @@ namespace Content.Server.Psionics.Glimmer
             if (tier < GlimmerTier.High)
                 return;
 
-            var totalIntensity = (float) (_glimmerSystem.Glimmer * 2);
-            var slope = (float) (11 - _glimmerSystem.Glimmer / 100);
+            // var totalIntensity = (float) (_glimmerSystem.Glimmer * 2); // HL
+            // var slope = (float) (11 - _glimmerSystem.Glimmer / 100);
             var maxIntensity = 20;
 
             var removed = (float) _glimmerSystem.Glimmer * _random.NextFloat(0.1f, 0.15f);
             _glimmerSystem.Glimmer -= (int) removed;
             BeamRandomNearProber(uid, _glimmerSystem.Glimmer / 350, _glimmerSystem.Glimmer / 50);
-            _explosionSystem.QueueExplosion(uid, "Default", totalIntensity, slope, maxIntensity);
+            //_explosionSystem.QueueExplosion(uid, "Default", totalIntensity, slope, maxIntensity); // HL
         }
 
         private void OnUnanchorAttempt(EntityUid uid, SharedGlimmerReactiveComponent component, UnanchorAttemptEvent args)
