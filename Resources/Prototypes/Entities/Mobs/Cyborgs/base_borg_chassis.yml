@@ -75,7 +75,7 @@
   - type: ActivatableUI
     key: enum.BorgUiKey.Key
   - type: Targeting # Shitmed Change
-  - type: SurgeryTarget
+  # - type: SurgeryTarget # Sandwich: Borgs are silicon, not surgery targets
   - type: SiliconLawBound
   - type: ActionGrant
     actions:
