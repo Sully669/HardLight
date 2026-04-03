@@ -77,6 +77,18 @@ namespace Content.Server.Carrying
             SubscribeLocalEvent<BeingCarriedComponent, StrappedEvent>(OnBuckleChange);
             SubscribeLocalEvent<BeingCarriedComponent, UnstrappedEvent>(OnBuckleChange);
             SubscribeLocalEvent<CarriableComponent, CarryDoAfterEvent>(OnDoAfter);
+            SubscribeLocalEvent<BeingCarriedComponent, ComponentRemove>(OnCarriedRemove);
+            SubscribeLocalEvent<CarryingComponent, ComponentRemove>(OnCarrierRemove);
+        }
+
+        private void OnCarriedRemove(EntityUid uid, BeingCarriedComponent component, ComponentRemove args)
+        {
+            DropCarried(component.Carrier, uid);
+        }
+
+        private void OnCarrierRemove(EntityUid uid, CarryingComponent component, ComponentRemove args)
+        {
+            DropCarried(uid, component.Carried);
         }
 
         private void AddCarryVerb(EntityUid uid, CarriableComponent component, GetVerbsEvent<AlternativeVerb> args)
@@ -274,13 +286,16 @@ namespace Content.Server.Carrying
             var args = new DoAfterArgs(EntityManager, carrier, duration, ev, carried, target: carried) // Frontier: length<duration
             {
                 BreakOnMove = true,
-                NeedHand = true
+                NeedHand = true,
+                BlockDuplicate = false,
+                CancelDuplicate = true
             };
 
-            _doAfterSystem.TryStartDoAfter(args);
-
-            // Show a popup to the person getting picked up
-            _popupSystem.PopupEntity(Loc.GetString("carry-started", ("carrier", carrier)), carried, carried);
+            if (_doAfterSystem.TryStartDoAfter(args))
+            {
+                // Show a popup to the person getting picked up
+                _popupSystem.PopupEntity(Loc.GetString("carry-started", ("carrier", carrier)), carried, carried);
+            }
         }
 
         private void Carry(EntityUid carrier, EntityUid carried)
@@ -324,15 +339,22 @@ namespace Content.Server.Carrying
 
         public void DropCarried(EntityUid carrier, EntityUid carried)
         {
-            RemComp<CarryingComponent>(carrier); // get rid of this first so we don't recursively fire that event
-            RemComp<CarryingSlowdownComponent>(carrier);
-            RemComp<BeingCarriedComponent>(carried);
-            RemComp<KnockedDownComponent>(carried);
-            _actionBlockerSystem.UpdateCanMove(carried);
-            _virtualItemSystem.DeleteInHandsMatching(carrier, carried);
-            _transform.AttachToGridOrMap(carried);
-            _standingState.Stand(carried);
-            _movementSpeed.RefreshMovementSpeedModifiers(carrier);
+            if (carrier.Valid)
+            {
+                RemComp<CarryingComponent>(carrier);
+                RemComp<CarryingSlowdownComponent>(carrier);
+                _virtualItemSystem.DeleteInHandsMatching(carrier, carried);
+                _movementSpeed.RefreshMovementSpeedModifiers(carrier);
+            }
+
+            if (carried.Valid)
+            {
+                RemComp<BeingCarriedComponent>(carried);
+                RemComp<KnockedDownComponent>(carried);
+                _actionBlockerSystem.UpdateCanMove(carried);
+                _transform.AttachToGridOrMap(carried);
+                _standingState.Stand(carried);
+            }
         }
 
         private void ApplyCarrySlowdown(EntityUid carrier, EntityUid carried)
