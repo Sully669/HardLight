@@ -77,6 +77,7 @@ namespace Content.Server.Carrying
             SubscribeLocalEvent<BeingCarriedComponent, StrappedEvent>(OnBuckleChange);
             SubscribeLocalEvent<BeingCarriedComponent, UnstrappedEvent>(OnBuckleChange);
             SubscribeLocalEvent<CarriableComponent, CarryDoAfterEvent>(OnDoAfter);
+            //HL start
             SubscribeLocalEvent<BeingCarriedComponent, ComponentRemove>(OnCarriedRemove);
             SubscribeLocalEvent<CarryingComponent, ComponentRemove>(OnCarrierRemove);
         }
@@ -90,6 +91,7 @@ namespace Content.Server.Carrying
         {
             DropCarried(uid, component.Carried);
         }
+        // HL end
 
         private void AddCarryVerb(EntityUid uid, CarriableComponent component, GetVerbsEvent<AlternativeVerb> args)
         {
@@ -287,6 +289,7 @@ namespace Content.Server.Carrying
             {
                 BreakOnMove = true,
                 NeedHand = true,
+                // HL Start
                 BlockDuplicate = false,
                 CancelDuplicate = true
             };
@@ -296,6 +299,7 @@ namespace Content.Server.Carrying
                 // Show a popup to the person getting picked up
                 _popupSystem.PopupEntity(Loc.GetString("carry-started", ("carrier", carrier)), carried, carried);
             }
+            //HL End
         }
 
         private void Carry(EntityUid carrier, EntityUid carried)
@@ -339,6 +343,7 @@ namespace Content.Server.Carrying
 
         public void DropCarried(EntityUid carrier, EntityUid carried)
         {
+            // HL start
             if (carrier.Valid)
             {
                 RemComp<CarryingComponent>(carrier);
@@ -355,6 +360,7 @@ namespace Content.Server.Carrying
                 _transform.AttachToGridOrMap(carried);
                 _standingState.Stand(carried);
             }
+            //HL End
         }
 
         private void ApplyCarrySlowdown(EntityUid carrier, EntityUid carried)
