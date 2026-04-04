@@ -2248,3 +2248,29 @@ Entries:
         available to cyborgs on roundstart.
   id: 242
   time: '2026-04-02T20:09:09.0000000+00:00'
+- author: Illumos
+  changes:
+    - type: Add
+      message: Aphrodesiac Bite Trait~!
+  id: 243
+  time: '2026-04-03T21:10:50.0000000+00:00'
+- author: Sully669
+  changes:
+    - type: Fix
+      message: Fixed a bug where succumbing to your fate deleted your character
+  id: 244
+  time: '2026-04-03T21:12:13.0000000+00:00'
+- author: rtasva
+  changes:
+    - type: Add
+      message: New Epsilon alert sound
+  id: 245
+  time: '2026-04-03T21:12:55.0000000+00:00'
+- author: re-silvered
+  changes:
+    - type: Tweak
+      message: >-
+        Changed some interaction verbs to function/not function depending on if
+        you are restrained or if you're wearing a mask.
+  id: 246
+  time: '2026-04-03T21:15:13.0000000+00:00'
