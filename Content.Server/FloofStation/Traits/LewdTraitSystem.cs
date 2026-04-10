@@ -641,18 +641,30 @@ public sealed class LewdTraitSystem : EntitySystem
             if (_mobState.IsDead(uid))
                 continue;
 
+            if (!_solutionContainer.ResolveSolution(uid, containerCum.SolutionName, ref containerCum.Solution))
+                continue;
+
             if (EntityManager.TryGetComponent(uid, out HungerComponent? hunger))
             {
                 if (_hunger.GetHungerThreshold(hunger) < HungerThreshold.Okay)
                     continue;
+                _solutionContainer.TryAddReagent(containerCum.Solution.Value,
+                    containerCum.ReagentId,
+                    containerCum.QuantityPerUpdate,
+                    out var quantity);
+                if (quantity > 0)
+                {
+                    _hunger.ModifyHunger(uid, -containerCum.HungerUsage, hunger);
+                }
 
-                _hunger.ModifyHunger(uid, -containerCum.HungerUsage, hunger);
+                continue;
             }
 
-            if (!_solutionContainer.ResolveSolution(uid, containerCum.SolutionName, ref containerCum.Solution))
-                continue;
-
             _solutionContainer.TryAddReagent(containerCum.Solution.Value, containerCum.ReagentId, containerCum.QuantityPerUpdate, out _);
+
+
+
+
         }
 
         while (queryMilk.MoveNext(out var uid, out var containerMilk))
@@ -665,18 +677,24 @@ public sealed class LewdTraitSystem : EntitySystem
             if (_mobState.IsDead(uid))
                 continue;
 
+            if (!_solutionContainer.ResolveSolution(uid, containerMilk.SolutionName, ref containerMilk.Solution))
+                continue;
+
             if (EntityManager.TryGetComponent(uid, out HungerComponent? hunger))
             {
                 if (_hunger.GetHungerThreshold(hunger) < HungerThreshold.Okay)
                     continue;
-
+                _solutionContainer.TryAddReagent(containerMilk.Solution.Value, containerMilk.ReagentId, containerMilk.QuantityPerUpdate, out var quantity);
+                if(quantity > 0){
                 _hunger.ModifyHunger(uid, -containerMilk.HungerUsage, hunger);
-            }
-
-            if (!_solutionContainer.ResolveSolution(uid, containerMilk.SolutionName, ref containerMilk.Solution))
                 continue;
-
+                }
+            }
             _solutionContainer.TryAddReagent(containerMilk.Solution.Value, containerMilk.ReagentId, containerMilk.QuantityPerUpdate, out _);
+
+
+
+
         }
 
         while (queryPiss.MoveNext(out var uid, out var containerPiss))
@@ -689,16 +707,19 @@ public sealed class LewdTraitSystem : EntitySystem
             if (_mobState.IsDead(uid))
                 continue;
 
+            if (!_solutionContainer.ResolveSolution(uid, containerPiss.SolutionName, ref containerPiss.Solution))
+                continue;
             if (EntityManager.TryGetComponent(uid, out HungerComponent? hunger))
             {
                 if (_hunger.GetHungerThreshold(hunger) < HungerThreshold.Okay)
                     continue;
-
-                _hunger.ModifyHunger(uid, -containerPiss.HungerUsage, hunger);
-            }
-
-            if (!_solutionContainer.ResolveSolution(uid, containerPiss.SolutionName, ref containerPiss.Solution))
+                _solutionContainer.TryAddReagent(containerPiss.Solution.Value, containerPiss.ReagentId, containerPiss.QuantityPerUpdate, out var quantity);
+                if (quantity > 0)
+                {
+                    _hunger.ModifyHunger(uid, -containerPiss.HungerUsage, hunger);
+                }
                 continue;
+            }
 
             _solutionContainer.TryAddReagent(containerPiss.Solution.Value, containerPiss.ReagentId, containerPiss.QuantityPerUpdate, out _);
         }
