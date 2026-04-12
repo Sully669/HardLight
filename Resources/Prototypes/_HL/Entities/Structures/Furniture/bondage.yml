@@ -7,10 +7,9 @@
   - type: Sprite
     sprite: _HL/Structures/Furniture/maso-chair.rsi
     layers:
-    - state: locked
-      map: [ "enum.StrapVisuals.State" ]
     - state: unlocked
       map: [ "enum.StrapVisuals.State" ]
+
     noRot: true
   - type: Appearance
   - type: Physics
