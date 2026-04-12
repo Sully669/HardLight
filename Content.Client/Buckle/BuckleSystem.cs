@@ -21,6 +21,8 @@ internal sealed class BuckleSystem : SharedBuckleSystem
 
         SubscribeLocalEvent<BuckleComponent, AppearanceChangeEvent>(OnAppearanceChange);
         SubscribeLocalEvent<StrapComponent, MoveEvent>(OnStrapMoveEvent);
+        SubscribeLocalEvent<StrapComponent, LockedEvent>(OnStrapLockedEvent);
+        SubscribeLocalEvent<StrapComponent, UnlockedEvent>(OnStrapUnLockedEvent);
         SubscribeLocalEvent<BuckleComponent, BuckledEvent>(OnBuckledEvent);
         SubscribeLocalEvent<BuckleComponent, UnbuckledEvent>(OnUnbuckledEvent);
         SubscribeLocalEvent<BuckleComponent, AttemptMobCollideEvent>(OnMobCollide);
@@ -78,6 +80,29 @@ internal sealed class BuckleSystem : SharedBuckleSystem
                 buckle.OriginalDrawDepth = null;
             }
         }
+    }
+
+    private void OnStrapLockedEvent(Entity<StrapComponent> ent, ref LockedEvent args)
+    {
+        if (TryComp<StrapComponent>(ent, out var strap))
+        {
+            strap.Locked = true;
+            if(TryComp<SpriteComponent>(ent.Owner, out var sprite))
+                _sprite.LayerSetRsiState((ent.Owner, sprite), StrapVisuals.State,"locked");
+
+        }
+    }
+
+    private void OnStrapUnLockedEvent(Entity<StrapComponent> ent, ref UnlockedEvent args)
+    {
+        if (TryComp<StrapComponent>(ent, out var strap))
+        {
+            strap.Locked = false;
+            if(TryComp<SpriteComponent>(ent.Owner, out var sprite))
+                _sprite.LayerSetRsiState((ent.Owner, sprite), StrapVisuals.State,"unlocked");
+        }
+
+
     }
 
     /// <summary>

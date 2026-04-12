@@ -439,6 +439,57 @@ public abstract partial class SharedBuckleSystem
         Unbuckle(buckle!, strap, user);
         return true;
     }
+// Hardlight Start
+    public bool TryLock(EntityUid buckleUid,
+        EntityUid? user,
+        StrapComponent? strapComp = null,
+        bool popup = true)
+    {
+        Lock((buckleUid, strapComp), user);
+        return true;
+    }
+
+    private void Lock(Entity<StrapComponent?> strap, EntityUid? user)
+    {
+        if (!Resolve(strap.Owner, ref strap.Comp, false))
+            return;
+
+        if (!strap.Comp.Lockable || strap.Comp.Locked)
+            return;
+
+        _audio.PlayPredicted(strap.Comp.LockSound, strap, user);
+
+
+        var lockedEv = new LockedEvent(strap);
+        RaiseLocalEvent(strap, ref lockedEv);
+
+    }
+
+    public bool TryUnlock(EntityUid buckleUid,
+        EntityUid? user,
+        StrapComponent? strapComp = null,
+        bool popup = true)
+    {
+        Unlock((buckleUid, strapComp), user);
+        return true;
+    }
+
+    private void Unlock(Entity<StrapComponent?> strap, EntityUid? user)
+    {
+        if (!Resolve(strap.Owner, ref strap.Comp, false))
+            return;
+
+        if (!strap.Comp.Lockable || strap.Comp.Locked)
+            return;
+
+        _audio.PlayPredicted(strap.Comp.UnlockSound, strap, user);
+
+
+        var unlockedEv = new UnlockedEvent(strap);
+        RaiseLocalEvent(strap, ref unlockedEv);
+
+    }
+// Hardlight End
 
     public void Unbuckle(Entity<BuckleComponent?> buckle, EntityUid? user)
     {
@@ -527,6 +578,12 @@ public abstract partial class SharedBuckleSystem
         }
 
         strap = (strapUid, strapComp);
+        // Hardlight Start
+        if (strap.Comp is { Lockable: true, Locked: true })
+        {
+            return false;
+        }
+        // Hardlight End
         if (_gameTiming.CurTime < buckle.Comp.BuckleTime + buckle.Comp.Delay)
             return false;
 

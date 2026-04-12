@@ -1,0 +1,34 @@
+﻿- type: entity
+  name: masochistic chair
+  id: MasochisticChair
+  parent: BaseStructure
+  description: This looks like a sturdy fixture.
+  components:
+  - type: Sprite
+    sprite: _HL/Structures/Furniture/maso-chair.rsi
+    layers:
+    - state: locked
+      map: [ "enum.StrapVisuals.State" ]
+    - state: unlocked
+      map: [ "enum.StrapVisuals.State" ]
+    noRot: true
+  - type: Appearance
+  - type: Physics
+  - type: Transform
+    noRot: true
+  - type: Anchorable
+  - type: Strap
+    lockable: true
+    position: Stand
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Inflatable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+

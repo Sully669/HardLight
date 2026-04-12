@@ -155,6 +155,23 @@ public abstract partial class SharedBuckleSystem
                     : Identity.Name(entity, EntityManager)
             };
 
+// Hardlight Start
+            if (component.Lockable)
+            {
+                   var verb2 = new InteractionVerb()
+                    {
+                        Act = component.Locked
+                            ? () => TryUnlock(uid, args.User, component)
+                            : () => TryLock(uid, args.User, component),
+                        Text = Loc.GetString(component.Locked ? "toggle-lock-verb-unlock" : "toggle-lock-verb-lock"),
+                        Icon = !component.Locked
+                            ? new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/lock.svg.192dpi.png"))
+                            : new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/unlock.svg.192dpi.png")),
+                    };
+                    args.Verbs.Add(verb2);
+            }
+// Hardlight End
+
             // In the event that you have more than once entity with the same name strapped to the same object,
             // these two verbs will be identical according to Verb.CompareTo, and only one with actually be added to
             // the verb list. However this should rarely ever be a problem. If it ever is, it could be fixed by

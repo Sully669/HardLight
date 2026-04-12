@@ -97,6 +97,31 @@ public sealed partial class StrapComponent : Component
     /// </summary>
     [DataField]
     public float BuckleSelfDoafterTime = 0f;
+
+// Hardlight Start
+    /// <summary>
+    /// Can this strap be locked?
+    /// </summary>
+    [DataField]
+    public bool Lockable = false;
+
+    /// <summary>
+    /// Is this strap locked?
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool Locked = false;
+
+    /// <summary>
+    /// The sound to be played when a mob is buckled
+    /// </summary>
+    [DataField]
+    public SoundSpecifier LockSound  = new SoundPathSpecifier("/Audio/Effects/buckle.ogg");
+
+    /// <summary>
+    /// The sound to be played when a mob is unbuckled
+    /// </summary>
+    [DataField]
+    public SoundSpecifier UnlockSound = new SoundPathSpecifier("/Audio/Effects/unbuckle.ogg");
     // Hardlight End
 }
 
@@ -117,6 +142,20 @@ public enum StrapPosition
     /// </summary>
     Down
 }
+
+// Hardlight Start
+/// <summary>
+/// Event raised directed at a strap entity if the strap gets locked.
+/// </summary>
+[ByRefEvent]
+public readonly record struct LockedEvent(Entity<StrapComponent?> Strap);
+
+/// <summary>
+/// Event raised directed at a buckle entity if the strap gets unlocked.
+/// </summary>
+[ByRefEvent]
+public readonly record struct UnlockedEvent(Entity<StrapComponent?> Strap);
+// Hardlight End
 
 [Serializable, NetSerializable]
 public enum StrapVisuals : byte
