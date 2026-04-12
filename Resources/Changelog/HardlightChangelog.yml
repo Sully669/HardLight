@@ -2316,3 +2316,133 @@ Entries:
       message: Aphrodesiac bite now has a cooldown.
   id: 252
   time: '2026-04-04T19:55:06.0000000+00:00'
+- author: Magniras
+  changes:
+    - type: Add
+      message: Restored cool sexy thieving gloves
+    - type: Remove
+      message: Removed boring smelly thieving gloves
+  id: 253
+  time: '2026-04-08T21:36:19.0000000+00:00'
+- author: Generic_Eagle
+  changes:
+    - type: Tweak
+      message: ESAR now fully replaces the WT and Energy shotgun for HoS.
+  id: 254
+  time: '2026-04-08T22:49:24.0000000+00:00'
+- author: TrylobyteWasTaken
+  changes:
+    - type: Fix
+      message: Plating and Lattice can now be traversed at normal speed again.
+  id: 255
+  time: '2026-04-08T22:49:44.0000000+00:00'
+- author: Iisazel
+  changes:
+    - type: Add
+      message: >-
+        Flesh expeditions now have improved loot! Time to break some
+        assimilation sacks!
+  id: 256
+  time: '2026-04-08T22:50:36.0000000+00:00'
+- author: Nikode16
+  changes:
+    - type: Add
+      message: >-
+        Freezer Pouch so now you can live out your space warlord organ trading
+        simulator fantasy.
+  id: 257
+  time: '2026-04-08T22:56:36.0000000+00:00'
+- author: Iisazel
+  changes:
+    - type: Fix
+      message: Avalis can now use cryopods correctly
+  id: 258
+  time: '2026-04-08T22:59:33.0000000+00:00'
+- author: Illumos
+  changes:
+    - type: Add
+      message: UHP Gunnery server is now researchable.
+    - type: Tweak
+      message: Gunnery servers now require increasingly expensive amounts of materials.
+  id: 259
+  time: '2026-04-08T23:01:16.0000000+00:00'
+- author: VoidedDevNull
+  changes:
+    - type: Tweak
+      message: Newly bought ships do not include a latejoin spot anymore.
+  id: 260
+  time: '2026-04-08T23:11:01.0000000+00:00'
+- author: IngvarJackal
+  changes:
+    - type: Add
+      message: More aphro descriptions
+  id: 261
+  time: '2026-04-08T23:35:11.0000000+00:00'
+- author: fenndragon
+  changes:
+    - type: Add
+      message: Added more patron borgs
+    - type: Add
+      message: Added other tweaks and fixes
+  id: 262
+  time: '2026-04-09T01:14:42.0000000+00:00'
+- author: IngvarJackal
+  changes:
+    - type: Add
+      message: More aphrodesiac bites
+  id: 263
+  time: '2026-04-09T01:17:51.0000000+00:00'
+- author: Jerulean
+  changes:
+    - type: Add
+      message: Two recipes for Tiramisu.
+  id: 264
+  time: '2026-04-09T01:18:43.0000000+00:00'
+- author: NotLivyathan
+  changes:
+    - type: Tweak
+      message: >-
+        Round-end logic no longer forces shuttles not on the station map to FTL
+        to ColComm.
+    - type: Tweak
+      message: >-
+        FTL once again causes a 5.5 second startup delay, instead of occurring
+        instantly.
+    - type: Fix
+      message: >-
+        Round-end logic should no longer cause the server to hang and ultimately
+        crash.
+    - type: Fix
+      message: >-
+        Ending an expedition early from the shuttle console once again announces
+        that the expedition is ending.
+  id: 265
+  time: '2026-04-09T19:46:36.0000000+00:00'
+- author: Iisazel
+  changes:
+    - type: Add
+      message: Added new craftable bone items and some interesting drops from dinosaurs
+  id: 266
+  time: '2026-04-09T20:47:48.0000000+00:00'
+- author: Illumos
+  changes:
+    - type: Tweak
+      message: Wagging has been improved!
+  id: 267
+  time: '2026-04-09T21:19:47.0000000+00:00'
+- author: rtasva
+  changes:
+    - type: Add
+      message: '"Teach a Lesson" traitor objective!'
+    - type: Tweak
+      message: Reduced frequency of RR kill objective
+  id: 268
+  time: '2026-04-09T21:20:03.0000000+00:00'
+- author: re-silvered
+  changes:
+    - type: Tweak
+      message: Aphro fadeout message works again, and with a little bit more flare
+    - type: Fix
+      message: Peregrine mags being general use batteries
+  id: 269
+  time: '2026-04-09T21:27:02.0000000+00:00'
