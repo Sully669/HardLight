@@ -98,6 +98,12 @@ public sealed partial class StrapComponent : Component
     [DataField]
     public float BuckleSelfDoafterTime = 0f;
 
+    /// <summary>
+    /// How long it takes to unlock yourself from this chair
+    /// </summary>
+    [DataField]
+    public float UnlockSelfDoafterTime = 5f;
+
 // Hardlight Start
     /// <summary>
     /// Can this strap be locked?

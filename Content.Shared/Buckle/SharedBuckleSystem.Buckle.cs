@@ -59,6 +59,8 @@ public abstract partial class SharedBuckleSystem
         {
             BuckleDoafterEarly((uid, comp), ev.Event, ev);
         });
+
+        SubscribeLocalEvent<StrapComponent, UnlockDoAfterEvent>(OnUnlockDoAfter);
     }
 
     private void OnBuckleComponentShutdown(Entity<BuckleComponent> ent, ref ComponentShutdown args)
@@ -471,8 +473,33 @@ public abstract partial class SharedBuckleSystem
         StrapComponent? strapComp = null,
         bool popup = true)
     {
+        if (!Resolve(strapUid, ref strapComp, false))
+            return false;
+
+        if (user != null && strapComp.BuckledEntities.Contains(user.Value) && strapComp.UnlockSelfDoafterTime > 0)
+        {
+            var doAfterArgs = new DoAfterArgs(EntityManager, user.Value, strapComp.UnlockSelfDoafterTime, new UnlockDoAfterEvent(), strapUid, user.Value, strapUid)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = true,
+                AttemptFrequency = AttemptFrequency.EveryTick
+            };
+
+            _doAfter.TryStartDoAfter(doAfterArgs);
+            return true;
+        }
+
         Unlock((strapUid, strapComp), user);
         return true;
+    }
+
+    private void OnUnlockDoAfter(Entity<StrapComponent> entity, ref UnlockDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        Unlock((entity.Owner, entity.Comp), args.User);
+        args.Handled = true;
     }
 
     private void Unlock(Entity<StrapComponent?> strap, EntityUid? user)

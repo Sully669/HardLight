@@ -9,3 +9,9 @@ public sealed partial class BuckleDoAfterEvent : SimpleDoAfterEvent
 {
 
 }
+
+[Serializable, NetSerializable]
+public sealed partial class UnlockDoAfterEvent : SimpleDoAfterEvent
+{
+
+}
