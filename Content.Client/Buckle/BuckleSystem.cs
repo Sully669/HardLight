@@ -84,25 +84,14 @@ internal sealed class BuckleSystem : SharedBuckleSystem
 
     private void OnStrapLockedEvent(Entity<StrapComponent> ent, ref LockedEvent args)
     {
-        if (TryComp<StrapComponent>(ent, out var strap))
-        {
-            strap.Locked = true;
-            if(TryComp<SpriteComponent>(ent.Owner, out var sprite))
-                _sprite.LayerSetRsiState((ent.Owner, sprite), StrapVisuals.State,"locked");
-
-        }
+        if(TryComp<SpriteComponent>(ent.Owner, out var sprite))
+            _sprite.LayerSetRsiState((ent.Owner, sprite), StrapVisuals.State,"locked");
     }
 
     private void OnStrapUnLockedEvent(Entity<StrapComponent> ent, ref UnlockedEvent args)
     {
-        if (TryComp<StrapComponent>(ent, out var strap))
-        {
-            strap.Locked = false;
-            if(TryComp<SpriteComponent>(ent.Owner, out var sprite))
-                _sprite.LayerSetRsiState((ent.Owner, sprite), StrapVisuals.State,"unlocked");
-        }
-
-
+        if(TryComp<SpriteComponent>(ent.Owner, out var sprite))
+            _sprite.LayerSetRsiState((ent.Owner, sprite), StrapVisuals.State,"unlocked");
     }
 
     /// <summary>

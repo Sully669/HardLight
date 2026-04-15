@@ -440,12 +440,12 @@ public abstract partial class SharedBuckleSystem
         return true;
     }
 // Hardlight Start
-    public bool TryLock(EntityUid buckleUid,
+    public bool TryLock(EntityUid strapUid,
         EntityUid? user,
         StrapComponent? strapComp = null,
         bool popup = true)
     {
-        Lock((buckleUid, strapComp), user);
+        Lock((strapUid, strapComp), user);
         return true;
     }
 
@@ -457,20 +457,21 @@ public abstract partial class SharedBuckleSystem
         if (!strap.Comp.Lockable || strap.Comp.Locked)
             return;
 
-        _audio.PlayPredicted(strap.Comp.LockSound, strap, user);
+        strap.Comp.Locked = true;
+        Dirty(strap.Owner, strap.Comp);
 
+        _audio.PlayPredicted(strap.Comp.LockSound, strap, user);
 
         var lockedEv = new LockedEvent(strap);
         RaiseLocalEvent(strap, ref lockedEv);
-
     }
 
-    public bool TryUnlock(EntityUid buckleUid,
+    public bool TryUnlock(EntityUid strapUid,
         EntityUid? user,
         StrapComponent? strapComp = null,
         bool popup = true)
     {
-        Unlock((buckleUid, strapComp), user);
+        Unlock((strapUid, strapComp), user);
         return true;
     }
 
@@ -479,15 +480,16 @@ public abstract partial class SharedBuckleSystem
         if (!Resolve(strap.Owner, ref strap.Comp, false))
             return;
 
-        if (!strap.Comp.Lockable || strap.Comp.Locked)
+        if (!strap.Comp.Lockable || !strap.Comp.Locked)
             return;
+
+        strap.Comp.Locked = false;
+        Dirty(strap.Owner, strap.Comp);
 
         _audio.PlayPredicted(strap.Comp.UnlockSound, strap, user);
 
-
         var unlockedEv = new UnlockedEvent(strap);
         RaiseLocalEvent(strap, ref unlockedEv);
-
     }
 // Hardlight End
 
