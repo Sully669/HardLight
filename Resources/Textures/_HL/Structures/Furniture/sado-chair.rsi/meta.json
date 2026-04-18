@@ -1,0 +1,19 @@
+﻿{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by the mage of microsoft paint",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "unlocked",
+            "directions": 4
+        },
+        {
+            "name": "unlocked-overlay",
+            "directions": 4
+        }
+    ]
+}

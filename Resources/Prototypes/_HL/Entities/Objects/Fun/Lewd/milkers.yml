@@ -1,0 +1,11 @@
+- type: entity
+  name: hand milker
+  id: HandMilker
+  parent: BaseItem
+  components:
+    - type: Milker
+    - type: Sprite
+      sprite: _HL/Objects/Fun/Lewd/hand-milker.rsi
+      state: icon
+
+

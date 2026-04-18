@@ -2,7 +2,7 @@
   name: masochistic chair
   id: MasochisticChair
   parent: BaseStructure
-  description: This looks like a sturdy fixture.
+  description: A chair designed to be as comfortable as possible, just begging you to TRY to escape
   components:
   - type: Sprite
     sprite: _HL/Structures/Furniture/maso-chair.rsi
@@ -18,6 +18,70 @@
   - type: Anchorable
   - type: Strap
     lockable: true
+    position: Stand
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Inflatable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  name: sadistic chair
+  id: SadisticChair
+  parent: BaseStructure
+  description: A chair designed to be as uncomfortable as possible, just begging you to get off of it
+  components:
+  - type: Sprite
+    sprite: _HL/Structures/Furniture/sado-chair.rsi
+    layers:
+    - state: unlocked
+      map: [ "enum.StrapVisuals.State" ]
+
+    noRot: true
+  - type: Appearance
+  - type: Physics
+  - type: Transform
+    noRot: true
+  - type: Anchorable
+  - type: Strap
+    position: Stand
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Inflatable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  name: massage bed
+  id: MassageBed
+  parent: BaseStructure
+  description: A chair designed to be as uncomfortable as possible, just begging you to get off of it
+  components:
+  - type: Sprite
+    sprite: _HL/Structures/Furniture/sado-chair.rsi
+    layers:
+    - state: unlocked
+      map: [ "enum.StrapVisuals.State" ]
+
+    noRot: true
+  - type: Appearance
+  - type: Physics
+  - type: Transform
+    noRot: true
+  - type: Anchorable
+  - type: Strap
     position: Stand
   - type: Damageable
     damageContainer: Inorganic
