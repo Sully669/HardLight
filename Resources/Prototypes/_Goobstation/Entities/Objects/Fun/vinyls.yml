@@ -902,3 +902,169 @@
   - type: Vinyl
     song:
       path: /Audio/_HL/RadioStation/music/youngspirit.ogg
+
+- type: entity
+  name: "vinyl disk: Absconditus"
+  id: VinylDiskLobbyAbsconditus
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: white-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/Lobby/absconditus.ogg
+
+- type: entity
+  name: "vinyl disk: Atomic Amnesia"
+  id: VinylDiskLobbyAtomicAmnesia
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: white-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/Lobby/atomicamnesiammx.ogg
+
+- type: entity
+  name: "vinyl disk: Comet Haley"
+  id: VinylDiskLobbyCometHaley
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: white-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/Lobby/comet_haley.ogg
+
+- type: entity
+  name: "vinyl disk: Endless Space"
+  id: VinylDiskLobbyEndlessSpace
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: white-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/Lobby/endless_space.ogg
+
+- type: entity
+  name: "vinyl disk: Every light is blinking at once"
+  id: VinylDiskLobbyEveryLightIsBlinkingAtOnce
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: white-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/Lobby/every_light_is_blinking_at_once.ogg
+
+- type: entity
+  name: "vinyl disk: Lasers rip apart the bulkhead"
+  id: VinylDiskLobbyLasersRipApartTheBulkhead
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: white-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/Lobby/lasers_rip_apart_the_bulkhead.ogg
+
+- type: entity
+  name: "vinyl disk: mod.flip-flap"
+  id: VinylDiskLobbyModFlipFlap
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: white-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/Lobby/mod.flip-flap.ogg
+
+- type: entity
+  name: "vinyl disk: Pwmur"
+  id: VinylDiskLobbyPwmur
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: white-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/Lobby/pwmur.ogg
+
+- type: entity
+  name: "vinyl disk: Singuloose"
+  id: VinylDiskLobbySinguloose
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: white-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/Lobby/singuloose.ogg
+
+- type: entity
+  name: "vinyl disk: Spac Stac"
+  id: VinylDiskLobbySpacStac
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: white-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/Lobby/Spac_Stac.ogg
+
+- type: entity
+  name: "vinyl disk: Space Asshole"
+  id: VinylDiskLobbySpaceAsshole
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: white-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/Lobby/space_asshole.ogg
+
+- type: entity
+  name: "vinyl disk: The Wizard"
+  id: VinylDiskLobbyTheWizard
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: white-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/Lobby/the_wizard.ogg
+
+- type: entity
+  name: "vinyl disk: Thunderdome"
+  id: VinylDiskLobbyThunderdome
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: white-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/Lobby/thunderdome.ogg
+
+- type: entity
+  name: "vinyl disk: Title2"
+  id: VinylDiskLobbyTitle2
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: white-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/Lobby/title2.ogg
+
+- type: entity
+  name: "vinyl disk: Title3"
+  id: VinylDiskLobbyTitle3
+  parent: BaseVinylDisk
+  components:
+  - type: Sprite
+    state: white-vinyl-disk
+  - type: Vinyl
+    song:
+      path: /Audio/Lobby/title3.ogg
+
