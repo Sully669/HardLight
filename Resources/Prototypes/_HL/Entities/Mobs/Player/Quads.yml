@@ -211,7 +211,7 @@
     stateOn: engieservborgballz
     movementStateOff: engieservborg_moving
     movementStateOn: engieservborg_movingballz
-    
+
 - type: entity
   id: Orchidborg
   parent: BorgChassisQuad
@@ -353,7 +353,7 @@
     sprite: Objects/Weapons/Guns/Projectiles/projectiles.rsi
     state: impact_abyss_laser
   maxLength: 21
-    
+
 - type: entity
   id: PlayerBorgQuadViz
   parent: AbyssQuad
@@ -371,7 +371,7 @@
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellAntiqueProto
-        
+
 - type: entity
   id: PlayerBorgQuadorchid
   parent: Orchidborg
@@ -460,7 +460,7 @@
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellMedium        
+        startingItem: PowerCellMedium
 
 - type: entity
   id: PlayerBorgQuadPetal
@@ -478,8 +478,8 @@
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellMedium 
-        
+        startingItem: PowerCellMedium
+
 - type: entity
   id: PlayerBorgQuadkillswitch
   parent: assaultQuad
@@ -496,7 +496,7 @@
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellMedium 
+        startingItem: PowerCellMedium
 
 - type: entity
   id: PlayerBorgQuadchews
@@ -514,10 +514,11 @@
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
-        startingItem: PowerCellMedium 
+        startingItem: PowerCellMedium
 
 - type: entity
   id: PlayerBorgQuadxiv3n
+  description: He looks fluffy and dangerous
   parent: wolfborg
   name: Wolf
   suffix: Battery, Tools
