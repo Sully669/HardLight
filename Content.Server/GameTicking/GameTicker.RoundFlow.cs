@@ -45,6 +45,7 @@ namespace Content.Server.GameTicking
         [Dependency] private readonly ITaskManager _taskManager = default!;
         [Dependency] private readonly ArrivalsSystem _arrivalsSystem = default!;
         [Dependency] private readonly ShuttleSystem _shuttleSystem = default!;
+        [Dependency] private readonly IRobustRandom _random = default!;
 
         private static readonly Counter RoundNumberMetric = Metrics.CreateCounter(
             "ss14_round_number",
@@ -524,7 +525,7 @@ namespace Content.Server.GameTicking
             if (colcommMap != null)
             {
                 int arrivalIndex = 0;
-                const float colcommArrivalBaseRadius = 200f;
+                var colcommArrivalBaseRadius = _random.NextFloat(200f, 500f);
                 const float colcommArrivalSpreadStep = 8f;
                 const int colcommArrivalSpreadCount = 12;
 
