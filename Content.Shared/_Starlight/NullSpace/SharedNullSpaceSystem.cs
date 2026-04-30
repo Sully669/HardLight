@@ -1,3 +1,4 @@
+using Content.Shared.Damage.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Events;
@@ -23,6 +24,7 @@ public abstract class SharedEtherealSystem : EntitySystem
         SubscribeLocalEvent<NullSpaceComponent, MapInitEvent>(OnStartup);
         SubscribeLocalEvent<NullSpaceComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<NullSpaceComponent, InteractionAttemptEvent>(OnInteractionAttempt);
+        SubscribeLocalEvent<NullSpaceComponent, UseAttemptEvent>(OnUseAttempt);
         SubscribeLocalEvent<NullSpaceComponent, BeforeThrowEvent>(OnBeforeThrow);
         SubscribeLocalEvent<NullSpaceComponent, AttackAttemptEvent>(OnAttackAttempt);
         SubscribeLocalEvent<NullSpaceComponent, ShotAttemptedEvent>(OnShootAttempt);
@@ -50,6 +52,15 @@ public abstract class SharedEtherealSystem : EntitySystem
 
     private void OnShootAttempt(Entity<NullSpaceComponent> ent, ref ShotAttemptedEvent args)
     {
+        args.Cancel();
+    }
+
+    private void OnUseAttempt(EntityUid uid, NullSpaceComponent component, UseAttemptEvent args)
+    {
+        if (TryComp<NullPhaseComponent>(uid, out var phase)
+            && phase.PhaseAction == args.Used)
+            return;
+
         args.Cancel();
     }
 
@@ -85,6 +96,8 @@ public abstract class SharedEtherealSystem : EntitySystem
 
     private void PreventCollision(EntityUid uid, NullSpaceComponent component, ref PreventCollideEvent args)
     {
+        if (HasComp<StaminaDamageOnCollideComponent>(args.OtherEntity))
+            return;
         if (!_net.IsClient)
             args.Cancelled = true;
     }

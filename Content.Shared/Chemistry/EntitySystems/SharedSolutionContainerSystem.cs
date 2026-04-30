@@ -88,6 +88,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         {
             SubscribeLocalEvent<SolutionContainerManagerComponent, ComponentShutdown>(OnContainerManagerShutdown);
             SubscribeLocalEvent<ContainedSolutionComponent, ComponentShutdown>(OnContainedSolutionShutdown);
+            SubscribeLocalEvent<ContainedSolutionComponent, ComponentStartup>(OnContainedSolutionStartup);
         }
     }
 
@@ -997,6 +998,20 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
                 ContainerSystem.ShutdownContainer(solutionContainer);
         }
         entity.Comp.Containers.Clear();
+    }
+
+    private void OnContainedSolutionStartup(Entity<ContainedSolutionComponent> entity, ref ComponentStartup args)
+    {
+        var parent = Transform(entity).ParentUid;
+
+        if (!parent.IsValid())
+            return;
+
+        if (entity.Comp.Container == parent)
+            return;
+
+        entity.Comp.Container = parent;
+        Dirty(entity);
     }
 
     private void OnContainedSolutionShutdown(Entity<ContainedSolutionComponent> entity, ref ComponentShutdown args)

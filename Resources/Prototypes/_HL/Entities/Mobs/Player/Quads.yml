@@ -133,18 +133,21 @@
     preserveExistingChannels: true
     intrinsicChannels:
     - Binary
+    - Trinary
     - Science
     - Service
     - Common
   - type: IntrinsicRadioTransmitter
     intrinsicChannels:
     - Binary
+    - Trinary
     - Science
     - Service
     - Common
   - type: ActiveRadio
     intrinsicChannels:
     - Binary
+    - Trinary
     - Science
     - Service
     - Common
@@ -280,6 +283,10 @@
       shader: unshaded
       map: ["light"]
       visible: false
+  - type: DamagedByFlashing
+    flashDamage:
+        types:
+           Heat: 120
   - type: SpriteMovement
     movementLayers:
       movement:
@@ -315,8 +322,8 @@
     movementStateOff: abyssquad_moving
     movementStateOn: abyssquad_movingballz
   - type: HitscanBatteryAmmoProvider
-    proto: Abysslaser # Frontier: use NF variant
-    fireCost: 100
+    proto: Abysslaser # Frontier: Use NF variant
+    fireCost: 50
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 50
@@ -324,7 +331,7 @@
     maxCharge: 2000
     startingCharge: 2000
   - type: Gun
-    fireRate: 1
+    fireRate: 2
     useKey: false
     selectedMode: SemiAuto
     availableModes:
@@ -359,6 +366,11 @@
         - PositronicBrain
       borg_module:
         - BorgModuleTool
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellAntiqueProto
         
 - type: entity
   id: PlayerBorgQuadorchid
@@ -372,6 +384,11 @@
         - PositronicBrain
       borg_module:
         - BorgModuleTool
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMedium
 
 - type: entity
   id: PlayerBorgQuadengiserv
@@ -385,6 +402,11 @@
         - PositronicBrain
       borg_module:
         - BorgModuleTool
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMedium
 
 - type: entity
   id: PlayerBorgQuadfeathered
@@ -457,6 +479,60 @@
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: PowerCellMedium 
+        
+- type: entity
+  id: PlayerBorgQuadkillswitch
+  parent: assaultQuad
+  name: Assault
+  suffix: Battery, Tools
+  components:
+  - type: ContainerFill
+    containers:
+      borg_brain:
+        - PositronicBrain
+      borg_module:
+        - BorgModuleTool
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMedium 
+
+- type: entity
+  id: PlayerBorgQuadchews
+  parent: chewsborg
+  name: Chews
+  suffix: Battery, Tools
+  components:
+  - type: ContainerFill
+    containers:
+      borg_brain:
+        - PositronicBrain
+      borg_module:
+        - BorgModuleTool
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMedium 
+
+- type: entity
+  id: PlayerBorgQuadxiv3n
+  parent: wolfborg
+  name: Wolf
+  suffix: Battery, Tools
+  components:
+  - type: ContainerFill
+    containers:
+      borg_brain:
+        - PositronicBrain
+      borg_module:
+        - BorgModuleTool
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellAntiqueProto
 
 - type: entity
   id: PlayerBorgQuadMoss

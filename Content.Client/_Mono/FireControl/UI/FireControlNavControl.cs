@@ -49,8 +49,8 @@ public sealed class FireControlNavControl : BaseShuttleControl
 
     #region Mono
 
-    private const float RadarUpdateInterval = 0f;
-    private float _updateAccumulator = 0f;
+    private static readonly float RadarRequestInterval = (float) RadarBlipsSystem.RequestThrottle.TotalSeconds;
+    private float _requestAccumulator = 0f;
     #endregion
 
     private bool _isMouseDown;
@@ -126,11 +126,11 @@ public sealed class FireControlNavControl : BaseShuttleControl
     {
         base.FrameUpdate(args);
 
-        _updateAccumulator += args.DeltaSeconds;
+        _requestAccumulator += args.DeltaSeconds;
 
-        if (_updateAccumulator >= RadarUpdateInterval)
+        if (_requestAccumulator >= RadarRequestInterval)
         {
-            _updateAccumulator = 0;
+            _requestAccumulator = 0;
 
             if (_consoleEntity != null)
                 _blips.RequestBlips((EntityUid)_consoleEntity);
@@ -172,7 +172,14 @@ public sealed class FireControlNavControl : BaseShuttleControl
 
     public void SetConsole(EntityUid? consoleEntity)
     {
+        if (_consoleEntity == consoleEntity)
+            return;
+
         _consoleEntity = consoleEntity;
+        _requestAccumulator = 0f;
+
+        if (_consoleEntity != null)
+            _blips.RequestBlips(_consoleEntity.Value, force: true);
     }
 
     public void UpdateState(NavInterfaceState state)
@@ -315,12 +322,6 @@ public sealed class FireControlNavControl : BaseShuttleControl
         }
 
         #region Mono
-
-        var updateRatio = _updateAccumulator / RadarUpdateInterval;
-
-        Angle angle = updateRatio * Math.Tau;
-        var origin = ScalePosition(-new Vector2(Offset.X, -Offset.Y));
-        handle.DrawLine(origin, origin + angle.ToVec() * ScaledMinimapRadius * 1.42f, Color.Red.WithAlpha(0.1f));
 
         foreach (var blipData in _blips.GetCurrentBlips())
         {

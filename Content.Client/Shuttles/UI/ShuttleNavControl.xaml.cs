@@ -70,7 +70,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
     public InertiaDampeningMode DampeningMode { get; set; } = InertiaDampeningMode.Off;
     public ServiceFlags ServiceFlags { get; set; } = ServiceFlags.None;
 
-    public float MaximumIFFDistance { get; set; } = 3000f; // Frontier // Mono - 3000 by default to not gigaclutter
+    public float MaximumIFFDistance { get; set; } = 7500f; // Frontier // Mono - 3000 by default to not gigaclutter /// Hardlight: it's fiiiiiine
     public bool HideCoords { get; set; } = false; // Frontier
 
     private static Color _dockLabelColor = Color.White; // Frontier
@@ -93,9 +93,9 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
     #region Mono
     public bool RelativePanning = false;
 
-    // These 2 handle timing updates
-    protected const float RadarUpdateInterval = 0f;
-    protected float _updateAccumulator = 0f;
+    // Poll at the same cadence as the shared client request throttle to avoid per-frame spam.
+    protected static readonly float RadarRequestInterval = (float) RadarBlipsSystem.RequestThrottle.TotalSeconds;
+    protected float _requestAccumulator = 0f;
 
     private bool _wasPanned = false;
     private EntityCoordinates? _oldCoordinates;
@@ -143,7 +143,14 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
 
     public void SetConsole(EntityUid? consoleEntity)
     {
+        if (_consoleEntity == consoleEntity)
+            return;
+
         _consoleEntity = consoleEntity;
+        _requestAccumulator = 0f;
+
+        if (_consoleEntity != null)
+            _blips.RequestBlips(_consoleEntity.Value, force: true);
     }
 
     // Mono - evil hack
@@ -209,11 +216,11 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
     {
         base.FrameUpdate(args);
 
-        _updateAccumulator += args.DeltaSeconds;
+        _requestAccumulator += args.DeltaSeconds;
 
-        if (_updateAccumulator >= RadarUpdateInterval)
+        if (_requestAccumulator >= RadarRequestInterval)
         {
-            _updateAccumulator = 0; // I'm not subtracting because frame updates can majorly lag in a way normal ones cannot.
+            _requestAccumulator = 0; // I'm not subtracting because frame updates can majorly lag in a way normal ones cannot.
 
             if (_consoleEntity != null)
                 _blips.RequestBlips((EntityUid)_consoleEntity);
@@ -607,13 +614,6 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         }
 
         #region Mono
-        // Draw radar line
-        // First, figure out which angle to draw.
-        var updateRatio = _updateAccumulator / RadarUpdateInterval;
-
-        Angle angle = updateRatio * Math.Tau;
-        var origin = ScalePosition(-new Vector2(Offset.X, -Offset.Y));
-        handle.DrawLine(origin, origin + angle.ToVec() * ScaledMinimapRadius * 1.42f, Color.Red.WithAlpha(0.1f));
 
         // Get blips
         var rawBlips = _blips.GetCurrentBlips();
@@ -647,7 +647,7 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
         }
 
         // Draw hitscan lines from the radar blips system
-        var hitscanLines = _blips.GetRawHitscanLines();
+        var hitscanLines = _blips.GetRawHitscanLines(Detectors);
         foreach (var line in hitscanLines)
         {
             Vector2 startPosInView;
@@ -676,8 +676,14 @@ public partial class ShuttleNavControl : BaseShuttleControl // Mono
                 continue;
             }
 
-            // Only draw lines if at least one endpoint is within view
-            if (monoViewBounds.Contains(startPosInView) || monoViewBounds.Contains(endPosInView))
+            var lineBounds = new Box2(
+                Math.Min(startPosInView.X, endPosInView.X),
+                Math.Min(startPosInView.Y, endPosInView.Y),
+                Math.Max(startPosInView.X, endPosInView.X),
+                Math.Max(startPosInView.Y, endPosInView.Y)
+            );
+
+            if (monoViewBounds.Intersects(lineBounds))
             {
                 // Draw the line with the specified thickness and color
                 handle.DrawLine(startPosInView, endPosInView, line.Color);

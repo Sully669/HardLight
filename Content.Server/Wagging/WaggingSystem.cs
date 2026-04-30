@@ -2,6 +2,7 @@
 using Content.Server.Actions;
 using Content.Server.Humanoid;
 using Content.Shared._CS.Humanoid;
+using Content.Shared._Shitmed.Humanoid.Events; // Hardlight
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Mobs;
@@ -26,6 +27,7 @@ public sealed class WaggingSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<WaggingComponent, ComponentInit>(OnWaggingMapInit); // Coyote: Move to Component Init
+        SubscribeLocalEvent<WaggingComponent, ProfileLoadFinishedEvent>(OnProfileLoadFinished); // Hardlight
         SubscribeLocalEvent<WaggingComponent, ComponentShutdown>(OnWaggingShutdown);
         SubscribeLocalEvent<WaggingComponent, ToggleActionEvent>(OnWaggingToggle);
         SubscribeLocalEvent<WaggingComponent, MobStateChangedEvent>(OnMobStateChanged);
@@ -33,7 +35,18 @@ public sealed class WaggingSystem : EntitySystem
 
     private void OnWaggingMapInit(EntityUid uid, WaggingComponent component, ComponentInit args) // Coyote: Move to Component Init
     {
+        // Hardlight start
+        EnsureWaggingAction(uid, component);
+    }
 
+    private void OnProfileLoadFinished(EntityUid uid, WaggingComponent component, ref ProfileLoadFinishedEvent args)
+    {
+        EnsureWaggingAction(uid, component);
+    }
+
+    private void EnsureWaggingAction(EntityUid uid, WaggingComponent component)
+    {
+        // Hardlight end
         if (!TryComp<HumanoidAppearanceComponent>(uid, out var humanoid))
             return;
 
@@ -82,11 +95,13 @@ public sealed class WaggingSystem : EntitySystem
             string? target;
             if (wagging.Wagging)
             {
-                _coyoteMarking.TryGetStaticId(markings[idx].MarkingId, out target);
+                // Hardlight start
+                _coyoteMarking.TryGetWaggingId(markings[idx].MarkingId, out target);
             }
             else
             {
-                _coyoteMarking.TryGetWaggingId(markings[idx].MarkingId, out target);
+                // Hardlight end
+                _coyoteMarking.TryGetStaticId(markings[idx].MarkingId, out target);
             }
 
             if (target == null)

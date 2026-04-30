@@ -423,6 +423,7 @@
     #- VisionGoggles
     # WD EDIT END
     - ShuttleWeaponMaterials # HL
+    - HLBags # HL: HardLight bag recipes
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - AdvancedAmmoRecipePack

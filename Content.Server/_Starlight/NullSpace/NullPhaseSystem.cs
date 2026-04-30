@@ -11,6 +11,7 @@ using System.Linq;
 using Content.Server.Ghost;
 using Robust.Server.Containers;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using Content.Shared.Light.Components; // HardLight: Merged with upstream
 
 namespace Content.Server._Starlight.NullSpace;
@@ -23,6 +24,7 @@ public sealed class EtherealPhaseSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     private EntProtoId ShadekinShadow = "ShadekinShadow";
     private EntProtoId ShadekinPhaseInEffect = "ShadekinPhaseInEffect";
@@ -36,6 +38,9 @@ public sealed class EtherealPhaseSystem : EntitySystem
         SubscribeLocalEvent<NullPhaseComponent, GotEquippedEvent>(OnEquipped);
         SubscribeLocalEvent<NullPhaseComponent, GotUnequippedEvent>(OnUnequipped);
         SubscribeLocalEvent<NullPhaseComponent, NullPhaseActionEvent>(OnPhaseAction);
+        SubscribeLocalEvent<NullPhaseComponent, BeingUnequippedAttemptEvent>(OnUnequipAttempt);
+        SubscribeLocalEvent<NullHarnessComponent, GotEquippedEvent>(OnHarnessEquipped);
+        SubscribeLocalEvent<NullHarnessComponent, GotUnequippedEvent>(OnHarnessUnequipped);
     }
 
     private void OnStartup(EntityUid uid, NullPhaseComponent component, ComponentStartup args)
@@ -54,7 +59,9 @@ public sealed class EtherealPhaseSystem : EntitySystem
             || !clothing.Slots.HasFlag(args.SlotFlags))
             return;
 
-        EnsureComp<NullPhaseComponent>(args.Equipee);
+        var playerComp = EnsureComp<NullPhaseComponent>(args.Equipee);
+        playerComp.ExitDelay = component.ExitDelay;
+        playerComp.ForcedEjectionPenalty = component.ForcedEjectionPenalty;
     }
 
     private void OnUnequipped(EntityUid uid, NullPhaseComponent component, GotUnequippedEvent args)
@@ -62,8 +69,51 @@ public sealed class EtherealPhaseSystem : EntitySystem
         RemComp<NullPhaseComponent>(args.Equipee);
     }
 
+    private void OnHarnessEquipped(EntityUid uid, NullHarnessComponent component, GotEquippedEvent args)
+    {
+        if (!TryComp<ClothingComponent>(uid, out var clothing) || !clothing.Slots.HasFlag(args.SlotFlags))
+            return;
+
+        EnsureComp<BlockNullPhaseComponent>(args.Equipee);
+    }
+
+    private void OnHarnessUnequipped(EntityUid uid, NullHarnessComponent component, GotUnequippedEvent args)
+    {
+        RemComp<BlockNullPhaseComponent>(args.Equipee);
+    }
+
+    private void OnUnequipAttempt(EntityUid uid, NullPhaseComponent component, ref BeingUnequippedAttemptEvent args)
+    {
+        if (!TryComp<ClothingComponent>(uid, out var clothing) || !clothing.Slots.HasFlag(args.SlotFlags))
+            return;
+
+        if (!TryComp<NullPhaseComponent>(args.UnEquipTarget, out var playerComp))
+            return;
+
+        if (!_actionsSystem.TryGetActionData(playerComp.PhaseAction, out var action, logError: false))
+            return;
+
+        if (action.Cooldown is { End: var end } && end > _gameTiming.CurTime
+            && args.Unequipee == args.UnEquipTarget)
+        {
+            args.Cancel();
+            _popup.PopupEntity(Loc.GetString("null-phase-cooldown-locked"), args.UnEquipTarget, args.UnEquipTarget);
+        }
+    }
+
     private void OnPhaseAction(EntityUid uid, NullPhaseComponent component, NullPhaseActionEvent args)
     {
+        if (HasComp<BlockNullPhaseComponent>(args.Performer))
+        {
+            _popup.PopupEntity(Loc.GetString("null-harness-blocks-phase"), args.Performer, args.Performer);
+            args.Handled = true;
+            return;
+        }
+
+        // Apply exit cooldown when leaving; no cooldown on enter
+        var exitingNullspace = HasComp<NullSpaceComponent>(args.Performer);
+        _actionsSystem.SetUseDelay(component.PhaseAction, exitingNullspace ? TimeSpan.FromSeconds(component.ExitDelay) : null);
+
         // Perform phase on the user performing the action, not the provider entity.
         Phase(args.Performer);
         args.Handled = true;
@@ -94,6 +144,8 @@ public sealed class EtherealPhaseSystem : EntitySystem
             else
                 SpawnAtPosition(ShadekinShadow, Transform(uid).Coordinates);
 
+            if (TryComp<NullPhaseComponent>(uid, out var phaseComp))
+                phaseComp.VoluntaryExit = true;
             RemComp<NullSpaceComponent>(uid);
         }
         else

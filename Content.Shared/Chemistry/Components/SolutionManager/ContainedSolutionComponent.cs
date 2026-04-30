@@ -20,7 +20,7 @@ public sealed partial class ContainedSolutionComponent : Component
     /// <summary>
     /// The entity that the solution is contained in.
     /// </summary>
-    [DataField(required: true), AutoNetworkedField]
+    [AutoNetworkedField]
     public EntityUid Container;
 
     /// <summary>

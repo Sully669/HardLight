@@ -652,7 +652,7 @@ namespace Content.Shared.Cuffs
             if (!_doAfter.TryStartDoAfter(doAfterEventArgs))
                 return;
 
-            _adminLog.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(user):player} is trying to uncuff {ToPrettyString(target):subject}");
+            _adminLog.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(user):player} is trying to uncuff {ToPrettyString(target):subject}"); // Hardlight | High -> Medium. Someone uncuffing themselves is not a round-affecting action, is not always related to station activities, and frequently spams chat if someone attempts many breakouts
 
             var popupText = user == target
                 ? "cuffable-component-start-uncuffing-self-observer"
