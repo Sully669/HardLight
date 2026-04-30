@@ -106,6 +106,14 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
     private static readonly TimeSpan ShipyardActionDelay = TimeSpan.FromSeconds(1); // HardLight
     private HashSet<string>? _activeLoadDeletedPrototypes; // HardLight
 
+    // HardLight: queue of UseDelay-bearing entities from freshly loaded ships whose `ResetAllDelays`
+    // call has been deferred so we don't pay the dirty-storm cost on the load tick. Drained at a
+    // budgeted rate from Update(). The only observable effect of a delayed reset is that an item
+    // briefly shows whatever cooldown the previous owner left on it (which is also nonsensical
+    // gameplay state to inherit) until the queue reaches it. Disabled by setting
+    // hardlight.shipload.deferred_usedelay_budget = 0.
+    private readonly Queue<EntityUid> _pendingUseDelayResets = new();
+
     // The type of error from the attempted sale of a ship.
     public enum ShipyardSaleError
     {
@@ -200,6 +208,38 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             SetupShipyardIfNeeded();
         else
             CleanupShipyard();
+    }
+
+    // HardLight: drain the deferred UseDelay reset queue at a budgeted rate so a freshly loaded
+    // capital ship doesn't fire hundreds of Dirty() notifications on the load tick.
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_pendingUseDelayResets.Count == 0)
+            return;
+
+        var budget = _configManager.GetCVar(HLCCVars.ShipLoadDeferredUseDelayBudget);
+        if (budget <= 0)
+        {
+            // CVar was disabled mid-flight; flush whatever's still queued in one go to avoid
+            // leaking it across rounds. Same correctness as the original sync path.
+            while (_pendingUseDelayResets.TryDequeue(out var leftover))
+            {
+                if (_useDelayQuery.TryComp(leftover, out var useDelay))
+                    _useDelay.ResetAllDelays((leftover, useDelay));
+            }
+
+            return;
+        }
+
+        for (var i = 0; i < budget && _pendingUseDelayResets.TryDequeue(out var uid); i++)
+        {
+            // Entity may have been deleted between enqueue and now (ship sold, round restart,
+            // admin nuked, etc). Cached query handles this correctly.
+            if (_useDelayQuery.TryComp(uid, out var useDelay))
+                _useDelay.ResetAllDelays((uid, useDelay));
+        }
     }
 
     private void SetShipyardSellRate(float value)
@@ -1310,7 +1350,14 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             }
 
             if (_useDelayQuery.TryComp(uid, out var useDelay))
-                _useDelay.ResetAllDelays((uid, useDelay));
+            {
+                // HardLight: defer the reset to spread the Dirty() / GetPauseTime cost across ticks.
+                // Falls back to immediate reset when the budget CVar is 0 (preserves original behavior).
+                if (_configManager.GetCVar(HLCCVars.ShipLoadDeferredUseDelayBudget) > 0)
+                    _pendingUseDelayResets.Enqueue(uid);
+                else
+                    _useDelay.ResetAllDelays((uid, useDelay));
+            }
         });
 
         if (prunedContainers > 0)

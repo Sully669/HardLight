@@ -78,9 +78,12 @@ public sealed partial class SalvageSystem
     /// </summary>
     private void Announce(EntityUid mapUid, string text)
     {
+        // HardLight: announcements race with map teardown at expedition end (FTL-out clears
+        // the map while pending Announce calls are still in flight). Both "map component
+        // gone" and "MapId no longer registered" are normal during cleanup, so log at Debug.
         if (!TryComp<MapComponent>(mapUid, out var map))
         {
-            Log.Warning($"Skipping salvage announcement for {ToPrettyString(mapUid)} because the map component is no longer available.");
+            Log.Debug($"Skipping salvage announcement for {ToPrettyString(mapUid)} because the map component is no longer available.");
             return;
         }
 
@@ -88,7 +91,7 @@ public sealed partial class SalvageSystem
 
         if (!_mapSystem.TryGetMap(mapId, out var sender) || sender == null || sender == EntityUid.Invalid)
         {
-            Log.Warning($"Skipping salvage announcement for {ToPrettyString(mapUid)} because map {mapId} is no longer registered.");
+            Log.Debug($"Skipping salvage announcement for {ToPrettyString(mapUid)} because map {mapId} is no longer registered.");
             return;
         }
 
@@ -199,7 +202,10 @@ public sealed partial class SalvageSystem
         if (ev.FromMapUid is not { } expeditionMapUid || !TryComp<SalvageExpeditionComponent>(expeditionMapUid, out var expedition))
             return;
 
-        // HardLight: Update the station's expedition data via the console
+        // HardLight: only the wall SalvageExpeditionConsole flow keeps station-side
+        // expedition data that needs CanFinish flipped. Disk-spawned expeditions store
+        // a ShuttleConsoleComponent uid here and have no SalvageExpeditionDataComponent
+        // to update, so the TryComp guard correctly no-ops them.
         if (expedition.Console != null && TryComp<SalvageExpeditionConsoleComponent>(expedition.Console.Value, out var consoleComp))
         {
             var data = GetStationExpeditionData(expedition.Console.Value);
@@ -378,53 +384,82 @@ public sealed partial class SalvageSystem
         // End Frontier: mission-specific logic
     }
 
-    // HardLight: Clean up console state when expedition ends
+    // HardLight: Clean up console state when expedition ends.
+    //
+    // There are two ways an expedition can be started, and they store different things
+    // in `SalvageExpeditionComponent.Console`:
+    //
+    //  1. Wall SalvageExpeditionConsole (legacy/station path) -> `Console` is the
+    //     wall console entity. There is per-station expedition data to reset, missions
+    //     to clear, and a UI to repaint.
+    //  2. Expedition disk inserted into a ShuttleConsole (current shuttle path)
+    //     -> `Console` is the shuttle console entity. There is no station expedition
+    //     data tied to it; the disk owns its own cooldown and the shuttle console UI
+    //     does not need a reset. Cleanup is a no-op.
+    //
+    // The genuinely-bad cases are: `Console` is null (someone forgot to set it on a
+    // new spawn path), or `Console` points to an entity that is neither type (we are
+    // looking at the wrong entity). Both still log Warning so they get noticed.
     private void CleanupExpeditionConsoleState(EntityUid expeditionUid)
     {
         if (!TryComp<SalvageExpeditionComponent>(expeditionUid, out var component))
             return;
 
-        // Reset the console's station expedition data
-        if (component.Console != null && TryComp<SalvageExpeditionConsoleComponent>(component.Console.Value, out var consoleComp))
+        if (component.Console == null)
         {
-            var data = GetStationExpeditionData(component.Console.Value);
-            if (data != null)
+            // Player can sell the ship / round can restart while the expedition is still
+            // running, in which case the console reference legitimately gets cleared.
+            Log.Debug($"Skipping console cleanup for expedition {expeditionUid} - no originating console recorded.");
+            return;
+        }
+
+        var consoleUid = component.Console.Value;
+
+        // Disk-on-shuttle-console flow: nothing to clean up.
+        if (HasComp<ShuttleConsoleComponent>(consoleUid) && !HasComp<SalvageExpeditionConsoleComponent>(consoleUid))
+            return;
+
+        if (!TryComp<SalvageExpeditionConsoleComponent>(consoleUid, out var consoleComp))
+        {
+            // Either the wall console was deleted between spawn and cleanup (sold ship,
+            // deconstructed, etc.) or some other path stored a reference we don't
+            // recognise. Either way there is nothing actionable here.
+            Log.Debug($"Skipping console cleanup for expedition {expeditionUid} - originating console {consoleUid} is no longer a salvage console.");
+            return;
+        }
+
+        var data = GetStationExpeditionData(consoleUid);
+        if (data == null)
+            return;
+
+        Log.Info($"Cleaning up expedition state for console {ToPrettyString(consoleUid)}");
+
+        // Reset station expedition state immediately
+        data.ActiveMission = 0;
+        data.CanFinish = false;
+        data.Cooldown = false;
+        // HardLight: Clear missions immediately to prevent UI confusion
+        data.Missions.Clear();
+
+        // Update console to show cleared state
+        UpdateConsole((consoleUid, consoleComp));
+
+        // HardLight: Generate new missions after a shorter delay to reduce confusion
+        RobustTimer.Spawn(TimeSpan.FromSeconds(0.5), () => // consoleUid.SpawnTimer<RobustTimer.Spawn
+        {
+            if (Exists(consoleUid) && TryComp<SalvageExpeditionConsoleComponent>(consoleUid, out var comp))
             {
-                Log.Info($"Cleaning up expedition state for console {ToPrettyString(component.Console.Value)}");
-
-                // Reset station expedition state immediately
-                data.ActiveMission = 0;
-                data.CanFinish = false;
-                data.Cooldown = false;
-                // HardLight: Clear missions immediately to prevent UI confusion
-                data.Missions.Clear();
-
-                // Update console to show cleared state
-                UpdateConsole((component.Console.Value, consoleComp));
-
-                // HardLight: Generate new missions after a shorter delay to reduce confusion
-                var consoleUid = component.Console.Value;
-                RobustTimer.Spawn(TimeSpan.FromSeconds(0.5), () => // consoleUid.SpawnTimer<RobustTimer.Spawn
+                var stationData = GetStationExpeditionData(consoleUid);
+                if (stationData != null && !stationData.GeneratingMissions)
                 {
-                    if (Exists(consoleUid) && TryComp<SalvageExpeditionConsoleComponent>(consoleUid, out var comp))
-                    {
-                        var stationData = GetStationExpeditionData(consoleUid);
-                        if (stationData != null && !stationData.GeneratingMissions)
-                        {
-                            GenerateMissions(stationData);
-                            UpdateConsole((consoleUid, comp));
-                            Log.Info($"Console {ToPrettyString(consoleUid)} missions regenerated after expedition cleanup");
-                        }
-                    }
-                });
-
-                Log.Info($"Console {ToPrettyString(component.Console.Value)} state reset successfully");
+                    GenerateMissions(stationData);
+                    UpdateConsole((consoleUid, comp));
+                    Log.Info($"Console {ToPrettyString(consoleUid)} missions regenerated after expedition cleanup");
+                }
             }
-        }
-        else
-        {
-            Log.Warning($"Failed to cleanup console state for expedition {expeditionUid} - console reference missing or invalid");
-        }
+        });
+
+        Log.Info($"Console {ToPrettyString(consoleUid)} state reset successfully");
     }
 
     /// <summary>

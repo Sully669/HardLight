@@ -134,7 +134,7 @@
           type: WiresBoundUserInterface
   - type: RadarConsole
   - type: WorldLoader
-    radius: 384 # Mono
+    radius: 64 # Mono
   - type: PointLight
     radius: 1.5
     energy: 1.6
@@ -172,6 +172,11 @@
   - type: ShipRepairable
     repairTime: 10
     repairCost: 30
+  - type: RadarBlip
+    visibleFromOtherGrids: true
+    radarColor: "#03f8fc"
+    scale: 1.5
+    shape: diamond
 
 - type: entity
   parent: [BaseComputerShuttle, BaseShuttleIntercom] # Frontier - BaseShuttleIntercom
@@ -236,7 +241,7 @@
       - Syndicate
   - type: RadarConsole
   - type: WorldLoader
-    radius: 1536
+    radius: 64
   - type: PointLight
     radius: 1.5
     energy: 1.6

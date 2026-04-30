@@ -275,10 +275,10 @@ public sealed partial class ChatSystem : SharedChatSystem
                 SendEntityEmote(source, message, range, nameOverride, hideLog: hideLog, ignoreActionBlocker: ignoreActionBlocker);
                 break;
             case InGameICChatType.Subtle:
-                SendEntitySubtle(source, message, range, nameOverride, hideLog: hideLog, ignoreActionBlocker: true, color: color);
+                SendEntitySubtle(source, message, range, nameOverride, hideLog: hideLog, ignoreActionBlocker: true, color: color, channel: ChatChannel.Subtle);
                 break;
             case InGameICChatType.SubtleOOC:
-                SendEntitySubtle(source, $"OOC: {message}", range, nameOverride, hideLog: hideLog, ignoreActionBlocker: true, color: color); // HardLight: Capitalized OOC for consistency with other OOC chats.
+                SendEntitySubtle(source, $"OOC: {message}", range, nameOverride, hideLog: hideLog, ignoreActionBlocker: true, color: color, channel: ChatChannel.SubtleOOC); // HardLight: Capitalized OOC for consistency with other OOC chats.
                 break;
             //Nyano - Summary: case adds the telepathic chat sending ability.
             case InGameICChatType.Telepathic:
@@ -651,7 +651,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         bool hideLog = false,
         bool ignoreActionBlocker = false,
         NetUserId? author = null,
-        string? color = null
+        string? color = null,
+        ChatChannel channel = ChatChannel.Subtle
         )
     {
         if (!_actionBlocker.CanEmote(source) && !ignoreActionBlocker)
@@ -672,7 +673,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 continue;
             if (MessageRangeCheck(session, data, range) == MessageRangeCheckResult.Disallowed)
                 continue;
-            _chatManager.ChatMessageToOne(ChatChannel.Emotes, action, wrappedMessage, source, false, session.Channel);
+            _chatManager.ChatMessageToOne(channel, action, wrappedMessage, source, false, session.Channel);
         }
         if (!hideLog)
             if (name != Name(source))
@@ -760,16 +761,16 @@ public sealed partial class ChatSystem : SharedChatSystem
                 initialResult = MessageRangeCheckResult.Full;
                 break;
             case ChatTransmitRange.GhostRangeLimit:
-                initialResult = (data.Observer && data.Range < 0 && !_adminManager.IsAdmin(session)) ? MessageRangeCheckResult.HideChat : MessageRangeCheckResult.Full;
+                initialResult = ((data.Observer == ObserverType.Observer || data.Observer == ObserverType.ObserverNoGhostHearing) && data.Range < 0 && !_adminManager.IsAdmin(session)) ? MessageRangeCheckResult.HideChat : MessageRangeCheckResult.Full;
                 break;
             case ChatTransmitRange.HideChat:
                 initialResult = MessageRangeCheckResult.HideChat;
                 break;
             case ChatTransmitRange.NoGhosts:
-                initialResult = (data.Observer && !_adminManager.IsAdmin(session)) ? MessageRangeCheckResult.Disallowed : MessageRangeCheckResult.Full;
+                initialResult = ((data.Observer == ObserverType.Observer || data.Observer == ObserverType.ObserverNoGhostHearing) && !_adminManager.IsAdmin(session)) ? MessageRangeCheckResult.Disallowed : MessageRangeCheckResult.Full;
                 break;
             case ChatTransmitRange.GhostRangeLimitNoAdminCheck:
-                initialResult = (data.Observer && data.Range < 0) ? MessageRangeCheckResult.HideChat : MessageRangeCheckResult.Full;
+                initialResult = ((data.Observer == ObserverType.Observer || data.Observer == ObserverType.ObserverNoGhostHearing) && data.Range < 0) ? MessageRangeCheckResult.HideChat : MessageRangeCheckResult.Full;
                 break;
         }
         var insistHideChat = data.HideChatOverride ?? false;
@@ -911,6 +912,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         // TODO proper speech occlusion
 
         var recipients = new Dictionary<ICommonSession, ICChatRecipientData>();
+        var ghostHearing = GetEntityQuery<GhostHearingComponent>();
         var ghost = GetEntityQuery<GhostComponent>();
         var xforms = GetEntityQuery<TransformComponent>();
 
@@ -927,8 +929,18 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             if (transformEntity.MapID != sourceMapId)
                 continue;
-
-            var observer = ghost.HasComponent(playerEntity);
+            var observer = ObserverType.NoObserver;
+            if (ghost.HasComponent(playerEntity))
+            {
+                if (!ghostHearing.HasComponent(playerEntity))
+                {
+                    observer = ObserverType.ObserverNoGhostHearing;
+                }
+                else
+                {
+                    observer = ObserverType.Observer;
+                }
+            }
 
             // even if they are a ghost hearer, in some situations we still need the range
             if (sourceCoords.TryDistance(EntityManager, transformEntity.Coordinates, out var distance) && distance < voiceGetRange)
@@ -937,15 +949,22 @@ public sealed partial class ChatSystem : SharedChatSystem
                 continue;
             }
 
-            if (observer)
-                recipients.Add(player, new ICChatRecipientData(-1, true));
+            if (observer == ObserverType.Observer)
+                recipients.Add(player, new ICChatRecipientData(-1, ObserverType.Observer));
         }
 
         RaiseLocalEvent(new ExpandICChatRecipientsEvent(source, voiceGetRange, recipients));
         return recipients;
     }
 
-    public readonly record struct ICChatRecipientData(float Range, bool Observer, bool? HideChatOverride = null)
+    public enum ObserverType
+    {
+        NoObserver,
+        Observer,
+        ObserverNoGhostHearing
+    }
+
+    public readonly record struct ICChatRecipientData(float Range, ObserverType Observer, bool? HideChatOverride = null)
     {
     }
 

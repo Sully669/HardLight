@@ -21,22 +21,21 @@ using Content.Shared.Projectiles;
 
 
 namespace Content.Server._Crescent.ShipShields;
+
 public sealed partial class ShipShieldsSystem : EntitySystem
 {
     private const string ShipShieldPrototype = "ShipShield";
-    private const float Padding = 50f;
-    private const float CollisionThreshold = 50f;
+
     //private const float DeflectionSpread = 25f;
     private const float EmitterUpdateRate = 1.5f;
 
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
-
     [Dependency] private readonly FixtureSystem _fixtureSystem = default!;
-
     [Dependency] private readonly PhysicsSystem _physicsSystem = default!;
-
     [Dependency] private readonly PvsOverrideSystem _pvsSys = default!;
 
+    private EntityQuery<ProjectileComponent> _projectileQuery;
+    private EntityQuery<ShipWeaponProjectileComponent> _shipWeaponProjectileQuery;
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -49,7 +48,7 @@ public sealed partial class ShipShieldsSystem : EntitySystem
             if (emitter.Accumulator < EmitterUpdateRate)
                 continue;
 
-            if ((float) Math.Pow(emitter.Damage, emitter.DamageExp) >= emitter.MaxDraw)
+            if (CalculateLoadDamage(emitter) >= emitter.MaxDraw)
                 emitter.Recharging = true;
             if (!power.Powered)
                 emitter.Recharging = true;
@@ -115,7 +114,10 @@ public sealed partial class ShipShieldsSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<ShipShieldComponent, StartCollideEvent>(OnCollide);
+        _projectileQuery = GetEntityQuery<ProjectileComponent>();
+        _shipWeaponProjectileQuery = GetEntityQuery<ShipWeaponProjectileComponent>();
+
+        SubscribeLocalEvent<ShipShieldComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<ShipShieldEmitterComponent, ComponentShutdown>(OnEmitterShutdown); // Mono
         SubscribeLocalEvent<ShipShieldedComponent, MapInitEvent>(OnShieldedMapInit);
 
@@ -125,50 +127,44 @@ public sealed partial class ShipShieldsSystem : EntitySystem
 
     private void OnShieldedMapInit(EntityUid uid, ShipShieldedComponent component, MapInitEvent args)
     {
-        // Clean up orphaned shield entities from save/load
-        // The shield entity won't survive serialization properly, so delete it
-        if (Exists(component.Shield) && !Deleted(component.Shield))
+        if (component.Source is { } source && TryComp<ShipShieldEmitterComponent>(source, out var emitter))
         {
-            QueueDel(component.Shield);
+            emitter.Shield = component.Shield;
+            emitter.Shielded = uid;
         }
 
-        // Remove the component so the emitter can recreate it fresh
-        RemCompDeferred<ShipShieldedComponent>(uid);
+        if (TryComp<ShipShieldComponent>(component.Shield, out var shield))
+        {
+            shield.Shielded = uid;
+            shield.Source = component.Source;
+        }
     }
 
-
-    // Mono notes: THIS CODE BASICALLY DOES NOT WORK (especially for raycasted projectiles)
-    private void OnCollide(EntityUid uid, ShipShieldComponent component, StartCollideEvent args)
+    private void OnPreventCollide(EntityUid uid, ShipShieldComponent component, ref PreventCollideEvent args)
     {
-        if (Transform(args.OtherEntity).Anchored)
-            return;
-
-        if (!TryComp<PhysicsComponent>(Transform(uid).GridUid, out var ourPhysics) || !TryComp<PhysicsComponent>(args.OtherEntity, out var theirPhysics))
-            return;
-
         // only handle ship weapons for now. engine update introduced physics regressions. Let's polish everything else and circle back yeah?
-        if (!HasComp<ShipWeaponProjectileComponent>(args.OtherEntity))
-            return;
-
-        if (!TryComp<ProjectileComponent>(args.OtherEntity, out var projectile))
-            return;
-        if (projectile.Weapon is not null)
+        if (!_shipWeaponProjectileQuery.HasComponent(args.OtherEntity) ||
+        !_projectileQuery.TryGetComponent(args.OtherEntity, out var projectile) ||
+        projectile.ProjectileSpent)
         {
-            // dont collide with projectiles coming from the same , grid  SPCR 2025
-            if (component.Shielded == Transform(projectile.Weapon.Value).GridUid)
-                return;
-        }
-
-        var ourVelocity = ourPhysics.LinearVelocity;
-        var velocity = theirPhysics.LinearVelocity;
-
-        var collisionSpeedVector = Vector2.Subtract(ourVelocity, velocity);
-
-        if (Math.Abs(collisionSpeedVector.Length()) < CollisionThreshold)
-        {
+            args.Cancelled = true;
             return;
         }
 
+        // Don't deflect/consume projectiles fired from the same grid we're shielding. This was
+        // previously claimed to be handled by ProjectileGridPhaseComponent, but that component
+        // does not exist in this fork. SpaceArtillerySystem cancels the same-grid contact on the
+        // projectile-side PreventCollideEvent, but each side gets a fresh event with Cancelled=false
+        // so the order in which the two handlers run is non-deterministic. Without this check, a
+        // ship's own ship-weapon fire frequently collides with its own shield on the first physics
+        // step, gets QueueDel'd, and damages the emitter -- which players see as "shields don't
+        // work" / "guns don't shoot through our shield".
+        if (projectile.Weapon is { } weapon
+            && _transformSystem.GetGrid(weapon) == component.Shielded)
+        {
+            args.Cancelled = true;
+            return;
+        }
 
         //if (TryComp<TimedDespawnComponent>(args.OtherEntity, out var despawn))
         //    despawn.Lifetime += despawn.Lifetime;
@@ -184,12 +180,13 @@ public sealed partial class ShipShieldsSystem : EntitySystem
         //deflectionVector = new Vector2((float) (Math.Cos(angle) * deflectionVector.X - Math.Sin(angle) * deflectionVector.Y), (float) (Math.Sin(angle) * deflectionVector.X - Math.Cos(angle) * deflectionVector.Y));
 
         // instead of reflecting the projectile, just delete it. this works better for gameplay and intuiting what is going on in a fight.
+        // why shoot the projectile again when you can just 180 its physics, tho?
         //_gun.ShootProjectile(args.OtherEntity, deflectionVector, _physicsSystem.GetMapLinearVelocity(uid), uid, null, velocity.Length());
 
-        if (component.Source != null)
+        if (component.Source is { } source)
         {
-            var ev = new ShieldDeflectedEvent(args.OtherEntity);
-            RaiseLocalEvent(component.Source.Value, ref ev);
+            var ev = new ShieldDeflectedEvent(args.OtherEntity, projectile);
+            RaiseLocalEvent(source, ref ev);
         }
     }
 
@@ -216,8 +213,18 @@ public sealed partial class ShipShieldsSystem : EntitySystem
     /// <returns>The shield entity.</returns>
     private EntityUid ShieldEntity(EntityUid entity, MapGridComponent? mapGrid = null, EntityUid? source = null)
     {
+        // HardLight: Treat a ShipShieldedComponent whose Shield no longer exists as stale and
+        // recreate the bubble. Without this, a ship saved while shielded keeps the marker
+        // component on the grid (Shield field defaults to EntityUid.Invalid after deserialization
+        // since it isn't a DataField); on load, this early-out returned that invalid uid forever
+        // and the emitter never got a real shield, so it just sat powered with no bubble.
         if (TryComp<ShipShieldedComponent>(entity, out var existingShielded))
-            return existingShielded.Shield;
+        {
+            if (Exists(existingShielded.Shield) && HasComp<ShipShieldComponent>(existingShielded.Shield))
+                return existingShielded.Shield;
+
+            RemComp<ShipShieldedComponent>(entity);
+        }
 
         if (!Resolve(entity, ref mapGrid, false))
             return EntityUid.Invalid;
@@ -225,7 +232,7 @@ public sealed partial class ShipShieldsSystem : EntitySystem
         var prototype = ShipShieldPrototype;
 
         var shield = Spawn(prototype, Transform(entity).Coordinates);
-        var shieldPhysics = AddComp<PhysicsComponent>(shield);
+        var shieldPhysics = EnsureComp<PhysicsComponent>(shield);
         var shieldComp = EnsureComp<ShipShieldComponent>(shield);
         shieldComp.Shielded = entity;
         shieldComp.Source = source;
@@ -242,7 +249,7 @@ public sealed partial class ShipShieldsSystem : EntitySystem
         _transformSystem.SetWorldRotation(shield, _transformSystem.GetWorldRotation(entity));
         _transformSystem.SetParent(shield, entity);
 
-        var chain = GenerateOvalFixture(shield, "shield", shieldPhysics, mapGrid);
+        var chain = GenerateOvalFixture(shield, "shield", shieldPhysics, mapGrid, shieldVisuals.Padding);
 
         List<Vector2> roughPoly = new();
 
@@ -260,10 +267,11 @@ public sealed partial class ShipShieldsSystem : EntitySystem
         internalPoly.Set(roughPoly);
 
         _fixtureSystem.TryCreateFixture(shield, internalPoly, "internalShield",
-            hard: false, // To be set to Hard once code is made to actually make this shit work
-            collisionLayer: (int)CollisionGroup.BulletImpassable, // Mono - Only blocks bullets
+            hard: true,
+            collisionLayer: (int)CollisionGroup.BulletImpassable, // Mono - Only try to block bullets
             body: shieldPhysics);
 
+        _physicsSystem.SetCanCollide(shield, true, body: shieldPhysics);
         _physicsSystem.WakeBody(shield, body: shieldPhysics);
         _physicsSystem.SetSleepingAllowed(shield, shieldPhysics, false);
 
@@ -286,11 +294,24 @@ public sealed partial class ShipShieldsSystem : EntitySystem
         return true;
     }
 
+    // 
     // HardLight start
     private bool HasEmitterShield(EntityUid emitterUid, EntityUid gridUid, ShipShieldEmitterComponent emitter)
     {
-        if (emitter.Shield != null && Exists(emitter.Shield.Value))
-            return true;
+        if (emitter.Shield is { } shieldUid && Exists(shieldUid))
+        {
+            if (TryComp<ShipShieldComponent>(shieldUid, out var shield)
+                && shield.Source == emitterUid
+                && shield.Shielded == gridUid)
+            {
+                emitter.Shielded = gridUid;
+                return true;
+            }
+
+            // Stale or mismatched shield reference; allow recreation.
+            emitter.Shield = null;
+            emitter.Shielded = null;
+        }
 
         if (TryComp<ShipShieldedComponent>(gridUid, out var shielded)
             && shielded.Source == emitterUid
@@ -359,7 +380,7 @@ public sealed partial class ShipShieldsSystem : EntitySystem
     }
     // HardLight end
 
-    private ChainShape GenerateOvalFixture(EntityUid uid, string name, PhysicsComponent physics, MapGridComponent mapGrid, float padding = Padding)
+    private ChainShape GenerateOvalFixture(EntityUid uid, string name, PhysicsComponent physics, MapGridComponent mapGrid, float padding)
     {
         float radius;
         float scale;
@@ -398,14 +419,14 @@ public sealed partial class ShipShieldsSystem : EntitySystem
 
         _fixtureSystem.TryCreateFixture(uid, chain, name,
             hard: false,
-            collisionLayer: (int) CollisionGroup.BulletImpassable, // Mono - Only blocks bullets
+            collisionLayer: (int)CollisionGroup.BulletImpassable, // Mono - Only blocks bullets
             body: physics);
 
         return chain;
     }
 
     [ByRefEvent]
-    public record struct ShieldDeflectedEvent(EntityUid Deflected)
+    public record struct ShieldDeflectedEvent(EntityUid Deflected, ProjectileComponent Projectile)
     {
 
     }

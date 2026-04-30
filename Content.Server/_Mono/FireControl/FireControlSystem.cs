@@ -36,6 +36,10 @@ public sealed partial class FireControlSystem : EntitySystem
     /// Dictionary of entities that have visualization enabled
     /// </summary>
     private readonly HashSet<EntityUid> _visualizedEntities = new();
+    private TimeSpan _nextVisualizationCleanup;
+    private static readonly TimeSpan VisualizationCleanupInterval = TimeSpan.FromSeconds(30);
+    private readonly List<EntityUid> _scratchControlled = new();
+    private readonly List<EntityUid> _scratchConsoles = new();
 
     private EntityQuery<SpaceArtilleryComponent> _artilleryQuery;
     private EntityQuery<FireControlRotateComponent> _fireRotateQuery;
@@ -49,6 +53,8 @@ public sealed partial class FireControlSystem : EntitySystem
         SubscribeLocalEvent<FireControlServerComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<FireControlServerComponent, EntityTerminatingEvent>(OnServerTerminating);
 
+        SubscribeLocalEvent<FireControlServerComponent, ComponentStartup>(OnServerStartup);
+        SubscribeLocalEvent<FireControllableComponent, ComponentStartup>(OnControllableStartup);
         SubscribeLocalEvent<FireControllableComponent, PowerChangedEvent>(OnControllablePowerChanged);
         SubscribeLocalEvent<FireControllableComponent, ComponentShutdown>(OnControllableShutdown);
         SubscribeLocalEvent<FireControllableComponent, EntParentChangedMessage>(OnControllableParentChanged);
@@ -62,6 +68,12 @@ public sealed partial class FireControlSystem : EntitySystem
         _artilleryQuery = GetEntityQuery<SpaceArtilleryComponent>();
         _fireRotateQuery = GetEntityQuery<FireControlRotateComponent>();
         _gunQuery = GetEntityQuery<GunComponent>();
+    }
+
+    private void OnServerStartup(EntityUid uid, FireControlServerComponent component, ComponentStartup args)
+    {
+        if (_power.IsPowered(uid))
+            TryConnect(uid, component);
     }
 
     private void OnPowerChanged(EntityUid uid, FireControlServerComponent component, PowerChangedEvent args)
@@ -104,17 +116,25 @@ public sealed partial class FireControlSystem : EntitySystem
             Unregister(uid, component);
     }
 
+    private void OnControllableStartup(EntityUid uid, FireControllableComponent component, ComponentStartup args)
+    {
+        if (_power.IsPowered(uid))
+            TryRegister(uid, component);
+    }
+
     private void OnControllableShutdown(EntityUid uid, FireControllableComponent component, ComponentShutdown args)
     {
         if (component.ControllingServer != null && TryComp<FireControlServerComponent>(component.ControllingServer, out var server))
         {
             Unregister(uid, component);
 
+            var docks = _shuttleConsoleSystem.GetAllDocks();
+
             foreach (var console in server.Consoles)
             {
                 if (TryComp<FireControlConsoleComponent>(console, out var consoleComp))
                 {
-                    UpdateUi(console, consoleComp);
+                    UpdateUi(console, consoleComp, docks);
                 }
             }
         }
@@ -136,12 +156,14 @@ public sealed partial class FireControlSystem : EntitySystem
             // Weapon is no longer on the same grid - unregister it
             Unregister(uid, component);
 
+            var docks = _shuttleConsoleSystem.GetAllDocks();
+
             // Update UI for any connected consoles
             foreach (var console in server.Consoles)
             {
                 if (TryComp<FireControlConsoleComponent>(console, out var consoleComp))
                 {
-                    UpdateUi(console, consoleComp);
+                    UpdateUi(console, consoleComp, docks);
                 }
             }
         }
@@ -163,20 +185,25 @@ public sealed partial class FireControlSystem : EntitySystem
         }
 
         // Unregister all controlled entities
-        var controlledCopy = component.Controlled.ToList(); // Create copy to avoid modification during iteration
-        foreach (var controllable in controlledCopy)
+        _scratchControlled.Clear();
+        _scratchControlled.AddRange(component.Controlled);
+        foreach (var controllable in _scratchControlled)
         {
             if (Exists(controllable))
                 Unregister(controllable);
         }
 
         // Unregister all consoles
-        var consolesCopy = component.Consoles.ToList(); // Create copy to avoid modification during iteration
-        foreach (var console in consolesCopy)
+        _scratchConsoles.Clear();
+        _scratchConsoles.AddRange(component.Consoles);
+        foreach (var console in _scratchConsoles)
         {
             if (Exists(console))
                 UnregisterConsole(console);
         }
+
+        _scratchControlled.Clear();
+        _scratchConsoles.Clear();
 
         // Clear the server's state
         component.Controlled.Clear();
@@ -216,6 +243,19 @@ public sealed partial class FireControlSystem : EntitySystem
             UpdateUi(console);
     }
 
+    private void RefreshConsoles(EntityUid grid)
+    {
+        var query = EntityQueryEnumerator<FireControlConsoleComponent>();
+
+        while (query.MoveNext(out var consoleUid, out var consoleComp))
+        {
+            if (_xform.GetGrid(consoleUid) != grid || !_power.IsPowered(consoleUid))
+                continue;
+
+            TryRegisterConsole(consoleUid, consoleComp);
+        }
+    }
+
     private bool TryConnect(EntityUid server, FireControlServerComponent? component = null)
     {
         if (!Resolve(server, ref component))
@@ -247,6 +287,7 @@ public sealed partial class FireControlSystem : EntitySystem
         component.ConnectedGrid = grid;
 
         RefreshControllables((EntityUid)grid, controlGrid);
+        RefreshConsoles((EntityUid)grid);
 
         return true;
     }
@@ -433,9 +474,10 @@ public sealed partial class FireControlSystem : EntitySystem
             return;
 
         // Get a copy of the controlled entities list to avoid modification during iteration
-        var controlled = component.Controlled.ToList();
+        _scratchControlled.Clear();
+        _scratchControlled.AddRange(component.Controlled);
 
-        foreach (var controllable in controlled)
+        foreach (var controllable in _scratchControlled)
         {
             if (TryComp<FireControllableComponent>(controllable, out var controlComp))
             {
@@ -447,12 +489,15 @@ public sealed partial class FireControlSystem : EntitySystem
             }
         }
 
+        _scratchControlled.Clear();
+
         // Update UI for all consoles
+        var docks = _shuttleConsoleSystem.GetAllDocks();
         foreach (var console in component.Consoles)
         {
             if (TryComp<FireControlConsoleComponent>(console, out var consoleComp))
             {
-                UpdateUi(console, consoleComp);
+                UpdateUi(console, consoleComp, docks);
             }
         }
     }
@@ -506,16 +551,23 @@ public sealed partial class FireControlSystem : EntitySystem
         // Set the cooldown for next firing
         comp.NextFire = _timing.CurTime + TimeSpan.FromSeconds(comp.FireCooldown);
 
+        var hasGun = _gunQuery.TryComp(weapon, out var gun);
+
         if (_fireRotateQuery.HasComp(weapon))
         {
             var goalAngle = Angle.FromWorldVec(direction);
+
+            // Align visual rotation with this gun's configured local forward direction.
+            if (hasGun && gun is { } rotateGun && rotateGun.DefaultDirection.LengthSquared() > float.Epsilon)
+                goalAngle -= Angle.FromWorldVec(rotateGun.DefaultDirection);
+
             _rotateToFace.TryRotateTo(weapon, goalAngle, 0f, Angle.FromDegrees(1), float.MaxValue, weaponXform);
         }
 
         // Try to get a gun component and fire the weapon
-        if (_gunQuery.TryComp(weapon, out var gun))
+        if (gun is { } fireGun)
         {
-            _gun.AttemptShots(user, weapon, gun, coords, TimeSpan.FromSeconds(0.2));
+            _gun.AttemptShots(user, weapon, fireGun, coords, TimeSpan.FromSeconds(0.2));
             return true;
         }
 
@@ -602,8 +654,10 @@ public sealed partial class FireControlSystem : EntitySystem
             returnOnFirstHit: true // We only need to know if there's ANY obstacle
         );
 
-        // Has line of sight if there are no obstacles in the path
-        return !raycastResults.Any();
+        // Has line of sight if there are no obstacles in the path.
+        // Manual enumerator avoids the LINQ closure allocation that .Any() would create on each call.
+        using var enumerator = raycastResults.GetEnumerator();
+        return !enumerator.MoveNext();
     }
 
     /// <summary>
@@ -709,6 +763,8 @@ public sealed partial class FireControlSystem : EntitySystem
     /// <returns>True if visualization was enabled, false if disabled</returns>
     public bool ToggleVisualization(EntityUid entityUid)
     {
+        CleanupVisualizationEntities();
+
         var netEntity = GetNetEntity(entityUid);
 
         // Check if already visualized
@@ -725,6 +781,20 @@ public sealed partial class FireControlSystem : EntitySystem
         var directions = CheckAllDirections(entityUid);
         RaiseNetworkEvent(new FireControlVisualizationEvent(netEntity, directions));
         return true;
+    }
+
+    private void CleanupVisualizationEntities()
+    {
+        if (_timing.RealTime < _nextVisualizationCleanup)
+            return;
+
+        _nextVisualizationCleanup = _timing.RealTime + VisualizationCleanupInterval;
+
+        foreach (var uid in _visualizedEntities.ToArray())
+        {
+            if (Deleted(uid) || Terminating(uid))
+                _visualizedEntities.Remove(uid);
+        }
     }
 
     /// <summary>
