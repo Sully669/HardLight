@@ -1,5 +1,6 @@
 using Content.Shared.Chemistry.Components;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.FloofStation.Traits;
@@ -13,10 +14,10 @@ public sealed partial class MilkerComponent : Component
     public Entity<SolutionComponent>? Solution;
 
     [DataField]
-    public FixedPoint2 QuantityPerUpdate = 1;
+    public FixedPoint2 QuantityPerUpdate = 5;
 
     [DataField]
-    public TimeSpan TransferDelay = TimeSpan.FromSeconds(1);
+    public TimeSpan TransferDelay = TimeSpan.FromSeconds(2);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan NextTransfer = TimeSpan.Zero;
@@ -32,4 +33,10 @@ public enum MilkerMode : byte
 {
     Milk,
     Cum,
+}
+
+[Serializable, NetSerializable]
+public enum MilkerVisuals : byte
+{
+    AttachedState,
 }

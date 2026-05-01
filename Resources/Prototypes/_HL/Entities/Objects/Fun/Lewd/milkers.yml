@@ -4,8 +4,46 @@
   parent: BaseItem
   components:
     - type: Milker
+    - type: SolutionContainerManager
+      solutions:
+        milker:
+          maxVol: 100
     - type: Sprite
+      layers:
+      - state: icon
+        map: [ "enum.SolutionContainerLayers.Base" ]
+      - state: milker_fill_1
+        map: [ "enum.SolutionContainerLayers.Fill" ]
+        offset: 0, 2
+        visible: false
       sprite: _HL/Objects/Fun/Lewd/hand-milker.rsi
       state: icon
-
-
+    - type: RefillableSolution
+      solution: milker
+    - type: ExaminableSolution
+      solution: milker
+    - type: Appearance
+    - type: SolutionContainerVisuals
+      maxFillLevels: 4
+      fillBaseName: milker_fill_
+      solutionName: milker
+    - type: SolutionTransfer
+      canChangeTransferAmount: true
+      maxTransferAmount: 100
+      minTransferAmount: 5
+    - type: Drink
+      solution: milker
+    - type: SolutionItemStatus
+      solution: milker
+    - type: MixableSolution
+      solution: milker
+    - type: DrainableSolution
+      solution: milker
+    - type: DrawableSolution
+      solution: milker
+    - type: InjectableSolution
+      solution: milker
+    - type: UserInterface
+      interfaces:
+        enum.TransferAmountUiKey.Key:
+          type: TransferAmountBoundUserInterface

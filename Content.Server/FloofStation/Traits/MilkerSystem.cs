@@ -7,6 +7,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Server.FloofStation.Traits;
@@ -16,10 +17,13 @@ public sealed class MilkerSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private const string MilkerContainerId = "milker";
+    private const string AttachedBreastState = "attached-breast";
+    private const string AttachedGroinState = "attached-groin";
 
     public override void Initialize()
     {
@@ -45,6 +49,7 @@ public sealed class MilkerSystem : EntitySystem
 
         var targetContainer = _container.EnsureContainer<Container>(target, MilkerContainerId);
         _container.Remove(ent.Owner, targetContainer, force: true);
+        SetAttachedVisual(target, null);
     }
 
     private void OnMilkVerbs(Entity<MilkProducerComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
@@ -116,6 +121,7 @@ public sealed class MilkerSystem : EntitySystem
         milker.Mode = mode;
         milker.NextTransfer = _timing.CurTime;
         Dirty(milkerUid, milker);
+        SetAttachedVisual(target, mode == MilkerMode.Milk ? AttachedBreastState : AttachedGroinState);
 
         _popup.PopupEntity(Loc.GetString("milker-popup-attached"), target, user, PopupType.Medium);
     }
@@ -131,8 +137,14 @@ public sealed class MilkerSystem : EntitySystem
 
         milker.AttachedTo = null;
         Dirty(milkerUid, milker);
+        SetAttachedVisual(target, null);
         _hands.PickupOrDrop(user, milkerUid);
         _popup.PopupEntity(Loc.GetString("milker-popup-detached"), target, user, PopupType.Medium);
+    }
+
+    private void SetAttachedVisual(EntityUid target, string? state)
+    {
+        _appearance.SetData(target, MilkerVisuals.AttachedState, state ?? string.Empty);
     }
 
     public override void Update(float frameTime)
@@ -160,6 +172,8 @@ public sealed class MilkerSystem : EntitySystem
 
             Entity<SolutionComponent>? sourceSolutionEntity = null;
             FixedPoint2 sourceVolume = FixedPoint2.Zero;
+            string reagentId;
+            string source;
             if (milker.Mode == MilkerMode.Milk && TryComp<MilkProducerComponent>(target, out var milkProducer))
             {
                 if (_solution.ResolveSolution(target, milkProducer.SolutionName, ref milkProducer.Solution, out var milkSolution))
@@ -167,6 +181,9 @@ public sealed class MilkerSystem : EntitySystem
                     sourceSolutionEntity = milkProducer.Solution;
                     sourceVolume = milkSolution.Volume;
                 }
+
+                reagentId = milkProducer.ReagentId;
+                source = "breasts";
             }
             else if (milker.Mode == MilkerMode.Cum && TryComp<CumProducerComponent>(target, out var cumProducer))
             {
@@ -175,6 +192,13 @@ public sealed class MilkerSystem : EntitySystem
                     sourceSolutionEntity = cumProducer.Solution;
                     sourceVolume = cumSolution.Volume;
                 }
+
+                reagentId = cumProducer.ReagentId;
+                source = "groin";
+            }
+            else
+            {
+                continue;
             }
 
             if (sourceSolutionEntity == null)
@@ -189,6 +213,15 @@ public sealed class MilkerSystem : EntitySystem
 
             if (amount <= FixedPoint2.Zero)
                 continue;
+
+            var transferPopup = Loc.GetString("milker-popup-transfer-tick", ("amount", amount), ("chemical", reagentId), ("source", source));
+
+            // Producer components can exist on non-actor entities.
+            // Use a recipient-targeted popup when possible, and fall back to PVS delivery.
+            if (HasComp<ActorComponent>(target))
+                _popup.PopupEntity(transferPopup, target, target);
+            else
+                _popup.PopupEntity(transferPopup, target);
 
             var split = _solution.SplitSolution(sourceSolutionEntity.Value, amount);
             _solution.TryAddSolution(milker.Solution!.Value, split);

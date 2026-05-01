@@ -1,0 +1,34 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "made by mage of microsoft paint",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "milker_fill_1"
+        },
+        {
+            "name": "milker_fill_2"
+        },
+        {
+            "name": "milker_fill_3"
+        },
+        {
+            "name": "milker_fill_4"
+        },
+        {
+            "name": "attached-groin",
+            "directions": 4
+        },
+        {
+            "name": "attached-breast",
+            "directions": 4
+        }
+    ]
+}
