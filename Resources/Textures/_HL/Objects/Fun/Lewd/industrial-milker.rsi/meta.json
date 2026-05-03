@@ -1,0 +1,46 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "made by mage of microsoft paint",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "milkeron"
+        },
+        {
+            "name": "milkeroff"
+        },
+        {
+            "name": "icon"
+        },
+        {
+            "name": "milker-indus-fill-1"
+        },
+        {
+            "name": "milker-indus-fill-2"
+        },
+        {
+            "name": "milker-indus-fill-3"
+        },
+        {
+            "name": "milker-indus-fill-4"
+        },
+        {
+            "name": "milker-indus-fill-5"
+        },
+        {
+            "name": "milker-indus-fill-6"
+        },
+        {
+            "name": "attached-groin",
+            "directions": 4
+        },
+        {
+            "name": "attached-breast",
+            "directions": 4
+        }
+    ]
+}

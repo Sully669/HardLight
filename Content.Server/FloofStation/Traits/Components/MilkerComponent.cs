@@ -2,6 +2,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Utility;
 
 namespace Content.Server.FloofStation.Traits;
 
@@ -10,6 +11,9 @@ public sealed partial class MilkerComponent : Component
 {
     [DataField]
     public string SolutionName = "milker";
+
+    [DataField]
+    public bool EnsureOwnSolution = true;
 
     public Entity<SolutionComponent>? Solution;
 
@@ -27,16 +31,29 @@ public sealed partial class MilkerComponent : Component
 
     [DataField]
     public MilkerMode Mode = MilkerMode.Milk;
+
+    [DataField]
+    public EntityUid? LinkedEntity;
+
+    [DataField]
+    public string? LinkedSolutionName;
+
+    [DataField]
+    public string? LinkToContainerSlotId;
+
+    [DataField]
+    public SpriteSpecifier? LinkSprite;
+
+    [DataField]
+    public string MilkerAttachedPrototype = "HandMilkerAttachedVisual";
+
+    public EntityUid? LinkVisualEntity;
+
+    public bool IsActivelyDrawing;
 }
 
 public enum MilkerMode : byte
 {
     Milk,
     Cum,
-}
-
-[Serializable, NetSerializable]
-public enum MilkerVisuals : byte
-{
-    AttachedState,
 }

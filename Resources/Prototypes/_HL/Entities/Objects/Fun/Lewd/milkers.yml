@@ -4,6 +4,7 @@
   parent: BaseItem
   components:
     - type: Milker
+      milkerAttachedPrototype: HandMilkerAttachedVisual
     - type: SolutionContainerManager
       solutions:
         milker:
@@ -14,7 +15,6 @@
         map: [ "enum.SolutionContainerLayers.Base" ]
       - state: milker_fill_1
         map: [ "enum.SolutionContainerLayers.Fill" ]
-        offset: 0, 2
         visible: false
       sprite: _HL/Objects/Fun/Lewd/hand-milker.rsi
       state: icon
@@ -47,3 +47,135 @@
       interfaces:
         enum.TransferAmountUiKey.Key:
           type: TransferAmountBoundUserInterface
+
+- type: entity
+  name: industrial milker
+  id: IndustrialMilker
+  parent: BaseMachinePowered
+  components:
+    - type: Transform
+      anchored: true
+    - type: SolutionContainerManager
+      solutions:
+        milker:
+          maxVol: 100
+    - type: Sprite
+      layers:
+      - state: milkeroff
+        map: [ "milker_active_state" ]
+      - state: milkeron
+        map: [ "milker_active_state" ]
+        visible: false
+      - state: milker-indus-fill-1
+        map: [ "enum.SolutionContainerLayers.Fill" ]
+        visible: false
+      sprite: _HL/Objects/Fun/Lewd/industrial-milker.rsi
+      state: milkeroff
+    - type: ItemSlots
+      slots:
+        industrial_nozzle:
+          name: industrial milker nozzle
+          startingItem: IndustrialMilkerNozzle
+    - type: RefillableSolution
+      solution: milker
+    - type: ExaminableSolution
+      solution: milker
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.MilkerVisuals.Active:
+          milker_active_state:
+            True: { state: milkeron }
+            False: { state: milkeroff }
+    - type: SolutionContainerVisuals
+      maxFillLevels: 6
+      fillBaseName: milker-indus-fill-
+      solutionName: milker
+    - type: SolutionTransfer
+      canChangeTransferAmount: true
+      maxTransferAmount: 100
+      minTransferAmount: 5
+    - type: Drink
+      solution: milker
+    - type: SolutionItemStatus
+      solution: milker
+    - type: MixableSolution
+      solution: milker
+    - type: DrainableSolution
+      solution: milker
+    - type: DrawableSolution
+      solution: milker
+    - type: InjectableSolution
+      solution: milker
+    - type: UserInterface
+      interfaces:
+        enum.TransferAmountUiKey.Key:
+          type: TransferAmountBoundUserInterface
+
+- type: entity
+  name: industrial milker nozzle
+  id: IndustrialMilkerNozzle
+  parent: BaseItem
+  components:
+    - type: Milker
+      ensureOwnSolution: false
+      linkedSolutionName: milker
+      linkToContainerSlotId: industrial_nozzle
+      milkerAttachedPrototype: IndustrialMilkerAttachedVisual
+    - type: Sprite
+      sprite: _HL/Objects/Fun/Lewd/industrial-milker.rsi
+      state: icon
+
+- type: entity
+  id: HandMilkerAttachedVisual
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      drawdepth: Overlays
+      noRot: true
+      sprite: _HL/Objects/Fun/Lewd/hand-milker.rsi
+      layers:
+      - state: attached-breast
+        map: [ "milker_breast" ]
+        visible: false
+      - state: attached-groin
+        map: [ "milker_groin" ]
+        visible: false
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.MilkerVisuals.BreastAttached:
+          milker_breast:
+            True: { visible: true }
+            False: { visible: false }
+        enum.MilkerVisuals.GroinAttached:
+          milker_groin:
+            True: { visible: true }
+            False: { visible: false }
+
+- type: entity
+  id: IndustrialMilkerAttachedVisual
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      drawdepth: Overlays
+      noRot: true
+      sprite: _HL/Objects/Fun/Lewd/industrial-milker.rsi
+      layers:
+      - state: attached-breast
+        map: [ "milker_breast" ]
+        visible: false
+      - state: attached-groin
+        map: [ "milker_groin" ]
+        visible: false
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.MilkerVisuals.BreastAttached:
+          milker_breast:
+            True: { visible: true }
+            False: { visible: false }
+        enum.MilkerVisuals.GroinAttached:
+          milker_groin:
+            True: { visible: true }
+            False: { visible: false }
