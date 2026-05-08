@@ -1,12 +1,10 @@
-using Content.Server.Nutrition.EntitySystems;
+using Content.Shared.Nutrition.EntitySystems;
 
 namespace Content.Server.Nutrition.Components;
 
 /// <summary>
-/// This component prevents NPC mobs like mice from wanting to eat something that is edible but is not exactly food.
-/// Including but not limited to: uranium, death pills, insulation
+/// This component allows NPC mobs to eat food with BadFoodComponent.
+/// See MobMouseAdmeme for usage.
 /// </summary>
-[RegisterComponent, Access(typeof(FoodSystem))]
-public sealed partial class BadFoodComponent : Component
-{
-}
+[RegisterComponent]
+public sealed partial class IgnoreBadFoodComponent : Component;
