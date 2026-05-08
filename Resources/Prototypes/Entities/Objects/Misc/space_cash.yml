@@ -64,7 +64,7 @@
   - type: CargoSellBlacklist
   - type: ShipyardSellCondition # Frontier: Teleport to shipyard console on sale
     preserveOnSale: true
-  - type: Food
+  - type: Edible
     solution: food
     delay: 1
     forceFeedDelay: 3

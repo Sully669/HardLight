@@ -7,7 +7,7 @@
     sprite: Mobs/Species/Diona/organs.rsi
   - type: Organ
     species: "Diona"
-  - type: Food
+  - type: Edible
   - type: Extractable
     grindableSolutionName: organ
   - type: SolutionContainerManager

@@ -387,7 +387,7 @@
   - type: Bloodstream
     bloodReagent: InsectBlood
     bloodMaxVolume: 20
-  - type: Food
+  - type: Edible
   - type: FlavorProfile
     flavors:
     - horrible
@@ -1091,7 +1091,7 @@
     growthDelay: 20
   - type: ExaminableHunger
   - type: Wooly
-  - type: Food
+  - type: Edible
     solution: wool
     requiresSpecialDigestion: true
     # Wooly prevents eating wool deleting the goat so its fine
@@ -1844,7 +1844,7 @@
         Base: dead-0
       Dead:
         Base: splat-0
-  - type: Food
+  - type: Edible
   - type: FlavorProfile
     flavors:
     - meaty
@@ -3557,7 +3557,7 @@
         Base: dead-0
       Dead:
         Base: splat-0
-  - type: Food
+  - type: Edible
   - type: FlavorProfile
     flavors:
     - meaty

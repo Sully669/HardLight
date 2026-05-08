@@ -562,7 +562,7 @@
     size: Tiny
     sprite: Objects/Specific/Chemistry/pills.rsi
   - type: Pill
-  - type: Food
+  - type: Edible
     delay: 0.6
     forceFeedDelay: 2
     transferAmount: null

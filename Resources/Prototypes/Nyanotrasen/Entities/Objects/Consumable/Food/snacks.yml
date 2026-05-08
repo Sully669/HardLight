@@ -14,7 +14,7 @@
   - type: Sprite
     sprite: Nyanotrasen/Objects/Consumable/Food/Snacks/boritopie.rsi
     state: borito-pie
-  - type: Food # HardLight - changed from edible
+  - type: Edible
     trash:
     - FoodPacketBoritosTrash
   - type: SolutionContainerManager

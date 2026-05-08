@@ -272,10 +272,8 @@
   - type: Clothing
     slots:
     - HEAD
-  - type: Food
+  - type: Edible
     solution: drink
-    useSound: /Audio/Items/drink.ogg
-    eatMessage: drink-component-try-use-drink-success-slurp
     delay: 0.5
     forceFeedDelay: 1.5
   - type: FlavorProfile

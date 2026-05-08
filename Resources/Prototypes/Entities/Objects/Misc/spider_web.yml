@@ -156,7 +156,7 @@
     - type: FlavorProfile
       flavors:
         - sweet
-    - type: Food
+    - type: Edible
       delay: 2
     - type: SolutionContainerManager
       solutions:

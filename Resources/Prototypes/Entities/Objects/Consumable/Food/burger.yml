@@ -7,7 +7,7 @@
   id: FoodBreadBun
   description: A hamburger bun. Round and convenient to hold.
   components:
-  - type: Food
+  - type: Edible
   - type: Sprite
     sprite: Objects/Consumable/Food/burger.rsi
     layers:
@@ -37,8 +37,8 @@
   description: It's time to start building the burger tower.
   components:
   - type: Item
-    size: Normal #patch until there is an adequate resizing system in place 
-  - type: Food
+    size: Normal #patch until there is an adequate resizing system in place
+  - type: Edible
   - type: Sprite
     drawdepth: Mobs
     noRot: true
@@ -71,7 +71,7 @@
   name: top bun
   description: The perfect finish for your burger tower.
   components:
-  - type: Food
+  - type: Edible
   - type: Sprite
     sprite: Objects/Consumable/Food/burger_sequence.rsi
     layers:
@@ -86,7 +86,7 @@
   - type: FoodSequenceElement
     entries:
       Burger: BunTopBurger
-  
+
 # Base
 
 - type: entity
@@ -98,7 +98,7 @@
     flavors:
       - bun
       - meaty
-  - type: Food
+  - type: Edible
     transferAmount: 5
   - type: Sprite
     sprite: Objects/Consumable/Food/burger.rsi
@@ -721,7 +721,7 @@
   id: FoodBurgerMcrib
   description: An elusive rib shaped burger with limited availability across the galaxy. Not as good as you remember it.
   components:
-  - type: Food
+  - type: Edible
     trash:
     - FoodKebabSkewer
   - type: FlavorProfile

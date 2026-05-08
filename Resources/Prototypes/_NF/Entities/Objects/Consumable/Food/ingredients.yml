@@ -84,7 +84,7 @@
   - type: FlavorProfile
     flavors:
       - bitter
-  - type: Food
+  - type: Edible
   - type: SolutionContainerManager
     solutions:
       food:
@@ -122,7 +122,7 @@
   - type: FlavorProfile
     flavors:
       - bitter
-  - type: Food
+  - type: Edible
   - type: SolutionContainerManager
     solutions:
       food:

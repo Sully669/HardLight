@@ -6,7 +6,7 @@
   - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
   - type: Organ
-  - type: Food
+  - type: Edible
   #    quality: Nasty # Frontier
   - type: Extractable
     grindableSolutionName: organ

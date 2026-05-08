@@ -450,7 +450,7 @@
     tags:
     - Ingredient
     - ClothMade
-  - type: Food # Frontier
+  - type: Edible # Frontier
     requiresSpecialDigestion: true # Frontier
   - type: SolutionContainerManager
     solutions:
@@ -490,7 +490,7 @@
           Quantity: 1.5
         - ReagentId: Fiber
           Quantity: 3.5
-  - type: Food # Frontier
+  - type: Edible # Frontier
     requiresSpecialDigestion: true # Frontier
   - type: MothFood # Frontier
 
@@ -518,7 +518,7 @@
           Quantity: 1.5
         - ReagentId: Fiber
           Quantity: 3.5
-  - type: Food # Frontier
+  - type: Edible # Frontier
     requiresSpecialDigestion: true # Frontier
   - type: MothFood # Frontier
 
@@ -582,7 +582,7 @@
   - type: SliceableFood
     count: 3
     slice: FoodCroissantRawCotton
-  - type: Food # Frontier
+  - type: Edible # Frontier
     requiresSpecialDigestion: true # Frontier
   - type: MothFood # Frontier
 
@@ -930,6 +930,6 @@
     - cotton
   - type: Sprite
     state: croissant-raw-cotton
-  - type: Food # Frontier
+  - type: Edible # Frontier
     requiresSpecialDigestion: true # Frontier
   - type: MothFood # Frontier

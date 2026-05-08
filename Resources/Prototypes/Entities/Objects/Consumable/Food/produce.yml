@@ -21,7 +21,7 @@
   - type: StackSignature
   - type: StackSpawnSelf
   # let cows eat raw produce like wheat and oats
-  - type: Food
+  - type: Edible
     requiredStomachs: 2
   - type: Produce
   - type: PotencyVisuals
@@ -357,7 +357,7 @@
   - type: FlavorProfile
     flavors:
       - banana
-  - type: Food
+  - type: Edible
     trash:
     - TrashBananaPeel
   - type: SolutionContainerManager
@@ -399,7 +399,7 @@
     flavors:
       - banana
       - nothing
-  - type: Food
+  - type: Edible
     trash:
     - TrashMimanaPeel
   - type: SolutionContainerManager
@@ -503,7 +503,7 @@
           Quantity: 1
         - ReagentId: Carbon
           Quantity: 2
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
 
 - type: entity
@@ -1208,7 +1208,7 @@
   - type: FlavorProfile
     flavors:
       - corn
-  - type: Food
+  - type: Edible
     trash:
     - FoodCornTrash
   - type: SolutionContainerManager
@@ -1919,7 +1919,7 @@
     sprite: Objects/Specific/Hydroponics/gatfruit.rsi
   - type: Produce
     seedId: gatfruit
-  - type: Food
+  - type: Edible
     trash:
     - NFWeaponRevolverRitland45Anom  # Hardlight: A Ritland with no FUCvalue
   - type: Tag
@@ -1954,7 +1954,7 @@
     heldPrefix: produce
   - type: Produce
     seedId: realCapfruit
-  - type: Food
+  - type: Edible
     trash:
     - NFRevolverCapGun # Frontier: RevolverCapGun<NFRevolverCapGun
   - type: Tag
@@ -1973,7 +1973,7 @@
   components:
   - type: Produce
     seedId: fakeCapfruit
-  - type: Food
+  - type: Edible
     trash:
     - NFRevolverCapGunFakeGrown # Frontier: add Grown
 
@@ -2378,7 +2378,7 @@
   - type: FlavorProfile
     flavors:
       - bungo
-  - type: Food
+  - type: Edible
     trash:
     - FoodBungoPit
   - type: SolutionContainerManager
@@ -2673,7 +2673,7 @@
   - type: FlavorProfile
     flavors:
       - cherry
-  - type: Food
+  - type: Edible
     trash:
     - TrashCherryPit
   - type: SolutionContainerManager
@@ -2747,7 +2747,7 @@
     heldPrefix: produce
   - type: Produce
     seedId: anomalyBerry
-  - type: Food
+  - type: Edible
     trash:
     - EffectAnomalyFloraBulb # Random loot
   - type: SolutionContainerManager
