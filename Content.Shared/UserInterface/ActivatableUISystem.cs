@@ -10,6 +10,7 @@ using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Wires; // HardLight
 using Content.Shared.Whitelist;
+using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.UserInterface;
@@ -17,6 +18,7 @@ namespace Content.Shared.UserInterface;
 public sealed partial class ActivatableUISystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminManager _adminManager = default!;
+    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
     [Dependency] private readonly ActionBlockerSystem _blockerSystem = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
@@ -98,6 +100,12 @@ public sealed partial class ActivatableUISystem : EntitySystem
     {
         if (!args.CanAccess)
             return false;
+
+        if (_playerManager.TryGetSessionByEntity(args.User, out var session) && session.AttachedEntity.HasValue)
+        {
+            if (TryComp<GhostComponent>(session.AttachedEntity, out _) && !_adminManager.IsAdmin(args.User))
+                return false;
+        }
 
         // HardLight: Require the wires panel to be open if the component requires a wires panel.
         if (TryComp<ActivatableUIRequiresPanelComponent>(uid, out _)
