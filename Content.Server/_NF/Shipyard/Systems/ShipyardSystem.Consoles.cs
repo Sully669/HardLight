@@ -82,6 +82,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly ShuttleRecordsSystem _shuttleRecordsSystem = default!;
+    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
 
     private static readonly Regex DeedRegex = new(@"\s*\([^()]*\)");
 
@@ -329,10 +330,10 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
             SendPurchaseMessage(shipyardConsoleUid, player, name, secretChannel, secret: true);
 
         PlayConfirmSound(player, shipyardConsoleUid, component);
-        /* if (voucherUsed)
+        if (voucherUsed)
             _adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low, $"{ToPrettyString(player):actor} used {ToPrettyString(targetId)} to purchase shuttle {ToPrettyString(shuttleUid)} with a voucher via {ToPrettyString(shipyardConsoleUid)}");
         else
-            _adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low, $"{ToPrettyString(player):actor} used {ToPrettyString(targetId)} to purchase shuttle {ToPrettyString(shuttleUid)} for {vessel.Price} credits via {ToPrettyString(shipyardConsoleUid)}"); */
+            _adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low, $"{ToPrettyString(player):actor} used {ToPrettyString(targetId)} to purchase shuttle {ToPrettyString(shuttleUid)} for {vessel.Price} credits via {ToPrettyString(shipyardConsoleUid)}");
 
         // Adding the record to the shuttle records system makes them eligible to be copied.
         // Can be set on the component of the shipyard.
@@ -739,7 +740,7 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
 
         RefreshState(uid, balance, true, name, sellValue, targetId, (ShipyardConsoleUiKey)args.UiKey, false);
 
-        //_adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low, $"{ToPrettyString(player):actor} loaded shuttle {ToPrettyString(shuttleUid)} from {(args.SourceFilePath ?? "YAML data")} via {ToPrettyString(uid)}");
+        _adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low, $"{ToPrettyString(player):actor} loaded shuttle {ToPrettyString(shuttleUid)} from {(args.SourceFilePath ?? "YAML data")} via {ToPrettyString(uid)}");
 
         // After a successful server-side load, instruct the client to delete their local YAML file.
         if (!string.IsNullOrWhiteSpace(args.SourceFilePath) && _player.TryGetSessionByEntity(player, out var session))
@@ -884,10 +885,10 @@ public sealed partial class ShipyardSystem : SharedShipyardSystem
 
         EntityUid? refreshId = targetId;
 
-        /* if (voucherUsed)
+        if (voucherUsed)
             _adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low, $"{ToPrettyString(player):actor} used {ToPrettyString(targetId)} to sell {shuttleName} (purchased with voucher) via {ToPrettyString(uid)}");
         else
-            _adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low, $"{ToPrettyString(player):actor} used {ToPrettyString(targetId)} to sell {shuttleName} for {bill} credits via {ToPrettyString(uid)}"); */
+            _adminLogger.Add(LogType.ShipYardUsage, LogImpact.Low, $"{ToPrettyString(player):actor} used {ToPrettyString(targetId)} to sell {shuttleName} for {bill} credits via {ToPrettyString(uid)}");
 
         // No uses on the voucher left, destroy it.
         if (voucher != null
