@@ -588,6 +588,8 @@
     - type: IconSmooth
       key: walls
       base: plastitanium
+    - type: StaticPrice
+      price: 250
 
 
 - type: entity
@@ -762,6 +764,8 @@
   - type: ShipRepairable
     repairTime: 20
     repairCost: 50
+  - type: StaticPrice
+    price: 250
 
 - type: entity
   id: WallPlastitaniumDiagonalIndestructible
@@ -816,6 +820,8 @@
   - type: ShipRepairable
     repairTime: 20
     repairCost: 50
+  - type: StaticPrice
+    price: 250
 
 
 - type: entity
