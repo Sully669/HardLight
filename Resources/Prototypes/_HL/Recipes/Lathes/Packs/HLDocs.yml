@@ -1,0 +1,13 @@
+- type: latheRecipePack
+  id: HardLightDocs
+  recipes:
+    # Security
+    - PaperWrittenNfsdWarrantRecipe
+    - PaperWrittenNfsdReportRecipe
+    - PaperWrittenNfsdArrestWarrantRecipe
+    - PaperWrittenNfsdArrestReportRecipe
+    - PaperWrittenNfsdDutyLogRecipe
+    - PaperWrittenNfsdAuthorizationRecipe
+    - PaperWrittenNfsdContrabandAmnestyRecipe
+    - PaperWrittenNfsdContrabandTurnoverRecipe
+    - PaperWrittenNfsdContrabandPermitRecipe

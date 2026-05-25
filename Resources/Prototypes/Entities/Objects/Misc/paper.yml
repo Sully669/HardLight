@@ -56,6 +56,8 @@
   - type: Item
     size: Tiny
   - type: PhysicalComposition
+    materialComposition:
+      Paper: 100
 
 - type: entity
   name: paper
