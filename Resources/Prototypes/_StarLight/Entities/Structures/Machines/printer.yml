@@ -26,7 +26,10 @@
     idleState: icon
     runningState: building
     staticPacks:
-    - HardLightDocs
+    - HardLightDocsSecurity
+    - HardLightDocsMedical
+    - HardLightDocsHM
+    - HardLightDocsOther
   - type: Fixtures
     fixtures:
       fix1:
@@ -45,3 +48,17 @@
       - Paper
     storage:
       Paper: 0
+
+- type: entity
+  parent: BaseFlatpack
+  id: PrinterDocFlatpack
+  name: document printer flatpack
+  description: A flatpack used for constructing a document printer.
+  components:
+  - type: Flatpack
+    entity: PrinterDoc
+  - type: Sprite
+    layers:
+    - state: base
+  - type: StaticPrice
+    price: 25 # Frontier: 75<25

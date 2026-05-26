@@ -129,15 +129,15 @@
   components:
   - type: Paper
     content: |2
-      [color=#2EA5E6]◥[bold]N[/bold]◣ [bold]Medical Contractor Standards[/bold][/color]
+      [color=#2EA5E6]◥[bold]ColComm[/bold]◣ [bold]Medical Contractor Standards[/bold][/color]
       [color=#2EA5E6]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
       [head=2]Health Insurance Contract[/head]
 
       [head=3]Policy Holder Information[/head]
-          [bold]Name:[/bold]
-          [bold]Species:[/bold]
-          [bold]Occupation:[/bold]
-          [bold]Vessel IFF:[/bold]
+          [bold]Name:[/bold][form]
+          [bold]Species:[/bold][form]
+          [bold]Occupation:[/bold][form]
+          [bold]Vessel IFF:[/bold][form]
 
       [head=3]Plan Coverage[/head]
           [bold]Medical Coverage:[/bold]
@@ -163,7 +163,7 @@
   components:
   - type: Paper
     content: |2
-      [color=#2EA5E6]◥[bold]N[/bold]◣ [bold]Medical Contractor Standards[/bold][/color]
+      [color=#2EA5E6]◥[bold]ColComm[/bold]◣ [bold]Medical Contractor Standards[/bold][/color]
       [color=#2EA5E6]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
       [head=2]Medical Service Invoice[/head]
 
@@ -201,7 +201,7 @@
   components:
   - type: Paper
     content: |2
-      [color=#33ccff]◥[bold]N[/bold]◣ [bold]Director of Care Payroll[/bold][/color]
+      [color=#33ccff]◥[bold]ColComm[/bold]◣ [bold]Director of Care Payroll[/bold][/color]
       [color=#33ccff]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
       [head=2]Medical Dispatch Payment[/head]
 
@@ -213,12 +213,12 @@
       [head=3]Description of Services Provided[/head]
 
       [head=3]Service Value[/head]
-          Medical Bounty Delivery: $0
-          Material Delivery: $0
-          Medical Services: $0
-          Other: $0
+          Medical Bounty Delivery: $[form=5]
+          Material Delivery: $[form=5]
+          Medical Services: $[form=5]
+          Other: $[form=5]
 
-      [bold]Total Value: $XXX,XXX[/bold]
+      [bold]Total Value: $[form=6][/bold]
 
       [color=#AAAAAA]This Form is void without the signature and stamp of the Director of Care. This form does not constitute a contract. Compensation for services provided is at the discretion of the Director of Care.[/color]
 
@@ -230,7 +230,7 @@
   components:
   - type: Paper
     content: |2
-      [color=#33ccff]◥[bold]N[/bold]◣ [bold]Director of Care Payroll[/bold][/color]
+      [color=#33ccff]◥[bold]ColComm[/bold]◣ [bold]Director of Care Payroll[/bold][/color]
       [color=#33ccff]‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾[/color]
       [head=2]Medical Release Form[/head]
 

@@ -7,7 +7,7 @@
   - type: MachineBoard
     prototype: PrinterDoc
     stackRequirements:
-      Steel: 3
       Glass: 1
     requirements:
+      MatterBin: 3
       Manipulator: 1
