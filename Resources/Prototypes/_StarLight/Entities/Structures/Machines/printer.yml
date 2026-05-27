@@ -41,6 +41,7 @@
         - MachineMask
         layer:
         - MachineLayer
+  - type: OreSiloClient
   - type: MaterialStorage
     canEjectStoredMaterials: true
     whitelist:

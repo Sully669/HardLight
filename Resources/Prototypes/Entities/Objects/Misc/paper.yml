@@ -55,6 +55,7 @@
           Quantity: 1
   - type: Item
     size: Tiny
+  - type: Material
   - type: PhysicalComposition
     materialComposition:
       Paper: 100
